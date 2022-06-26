@@ -21,9 +21,7 @@ export default function Vitae({
   profile: any;
   theme: any;
 }) {
-  // console.warn(profile);
   const { personal, adress, birth, experience, prof } = profile;
-  // console.log(software);
   const { strengths, software, languages, interests, summary } =
     prof.data.attributes;
   const { work, education, internships } = experience.data.attributes;

@@ -55,8 +55,6 @@ export default function Index() {
   const backgroundColor = useColorModeValue("gray.100", "gray.800");
   const invalid = actionData && actionData.error !== undefined;
 
-  console.log(actionData);
-
   return (
     <Flex
       direction={"column"}
