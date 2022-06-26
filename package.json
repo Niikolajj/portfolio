@@ -9,6 +9,8 @@
     "concurrently": "^7.2.2"
   },
   "scripts": {
-
+    "server": "yarn workspace strapi develop",
+    "client": "yarn workspace remix dev",
+    "dev": "concurrently --kill-others-on-fail -c 'bgGreen.black,bgBlue.black' \"yarn:server\" \"yarn:client\""
   }
 }
