@@ -1,0 +1,48 @@
+{
+  "kind": "singleType",
+  "collectionName": "profiles",
+  "info": {
+    "singularName": "profile",
+    "pluralName": "profiles",
+    "displayName": "Profile",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "languages": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::language-value.language-value"
+    },
+    "software": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::value.value"
+    },
+    "strengths": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::value.value"
+    },
+    "summary": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "text"
+    },
+    "interests": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::value.value"
+    }
+  }
+}

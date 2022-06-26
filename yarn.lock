@@ -2726,7 +2726,7 @@
     "@strapi/utils" "4.2.0"
     lodash "4.17.21"
 
-"@strapi/plugin-i18n@4.2.0":
+"@strapi/plugin-i18n@4.2":
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/@strapi/plugin-i18n/-/plugin-i18n-4.2.0.tgz#ae9a2f4b2e78c5be3d46884c57fbb808856b88ca"
   integrity sha512-IKi9k1w22sejzv6bvwGukVp+1ar6n2dt+jwwlWgSorr+48u3kyhmiZpqmLP95o9+3qE3sXpuOPm5P8vQKVNHbw==
@@ -2759,7 +2759,7 @@
     react-router-dom "5.2.0"
     sharp "0.30.6"
 
-"@strapi/plugin-users-permissions@4.2.0":
+"@strapi/plugin-users-permissions@4.2":
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/@strapi/plugin-users-permissions/-/plugin-users-permissions-4.2.0.tgz#33e845ad5f71ee87d9f14e0f9ecd27675e34127b"
   integrity sha512-T8GBoldQv6fMHrUFWhfShdXO1f2BQ0OVK3+MBv8T6BTgi2hSu0o1U0IyetZ6DCRFp4pKi/Fl3RPAq5pRk25ShA==
@@ -2798,7 +2798,7 @@
     "@strapi/utils" "4.2.0"
     fs-extra "10.0.0"
 
-"@strapi/strapi@4.2.0":
+"@strapi/strapi@4.2":
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/@strapi/strapi/-/strapi-4.2.0.tgz#565a1c52b7fd0866f8ea9a883260d204478a2279"
   integrity sha512-awBdXQvSOuHfQdRfYDA1jbyl4xQD0lBcZlkyA8wSnntzWJ7RvXm32rWBc8aZV58LAcC/J2mR1IjeNJ9Z3MzhYA==
@@ -11576,6 +11576,11 @@ react-helmet@^6.1.0:
     react-fast-compare "^3.1.1"
     react-side-effect "^2.1.0"
 
+react-icons@^4.4.0:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-4.4.0.tgz#a13a8a20c254854e1ec9aecef28a95cdf24ef703"
+  integrity sha512-fSbvHeVYo/B5/L4VhB7sBA1i2tS8MkT0Hb9t2H1AVPkwGfVHLJCqyr2Py9dKMxsyM63Eng1GkdZfbWj+Fmv8Rg==
+
 react-input-autosize@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/react-input-autosize/-/react-input-autosize-3.0.0.tgz#6b5898c790d4478d69420b55441fcc31d5c50a85"
@@ -12982,6 +12987,11 @@ std-env@^2.2.1:
   integrity sha512-eOsoKTWnr6C8aWrqJJ2KAReXoa7Vn5Ywyw6uCXgA/xDhxPoaIsBa5aNJmISY04dLwXPBnDHW4diGM7Sn5K4R/g==
   dependencies:
     ci-info "^3.1.1"
+
+strapi-plugin-populate-deep@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/strapi-plugin-populate-deep/-/strapi-plugin-populate-deep-0.1.2.tgz#89e9fa0dd10bb1c57336625f765cff98950dafa2"
+  integrity sha512-cYmK5g4QqrGAWjUzEnd6P1XcqeXFcu/2yk/lg3ClQDnp46vb9i03CT7tW2YHz9JSf8g371iq0JPholL1q7Q1CA==
 
 stream-browserify@^3.0.0:
   version "3.0.0"

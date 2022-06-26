@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "date_ranges",
+  "info": {
+    "singularName": "date-range",
+    "pluralName": "date-ranges",
+    "displayName": "DateRange"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "start": {
+      "type": "date"
+    },
+    "end": {
+      "type": "date"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "kind": "singleType",
+  "collectionName": "births",
+  "info": {
+    "singularName": "birth",
+    "pluralName": "births",
+    "displayName": "Birth"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "place": {
+      "type": "string"
+    },
+    "date": {
+      "type": "date"
+    }
+  }
+}

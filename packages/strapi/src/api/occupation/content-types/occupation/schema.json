@@ -1,0 +1,44 @@
+{
+  "kind": "collectionType",
+  "collectionName": "occupations",
+  "info": {
+    "singularName": "occupation",
+    "pluralName": "occupations",
+    "displayName": "occupation",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "date_range": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::date-range.date-range"
+    },
+    "title": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "organization": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::organization.organization"
+    },
+    "tasks": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::value.value",
+      "mappedBy": "occupation"
+    }
+  }
+}

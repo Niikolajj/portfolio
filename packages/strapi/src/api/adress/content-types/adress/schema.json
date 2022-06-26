@@ -1,0 +1,27 @@
+{
+  "kind": "singleType",
+  "collectionName": "adresses",
+  "info": {
+    "singularName": "adress",
+    "pluralName": "adresses",
+    "displayName": "adress"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "street": {
+      "type": "string"
+    },
+    "number": {
+      "type": "string"
+    },
+    "postcode": {
+      "type": "integer"
+    },
+    "city": {
+      "type": "string"
+    }
+  }
+}

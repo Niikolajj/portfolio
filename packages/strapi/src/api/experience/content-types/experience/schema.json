@@ -1,0 +1,31 @@
+{
+  "kind": "singleType",
+  "collectionName": "experiences",
+  "info": {
+    "singularName": "experience",
+    "pluralName": "experiences",
+    "displayName": "experience",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "work": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::occupation.occupation"
+    },
+    "education": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::occupation.occupation"
+    },
+    "internships": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::occupation.occupation"
+    }
+  }
+}
