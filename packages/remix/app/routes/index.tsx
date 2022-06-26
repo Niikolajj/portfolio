@@ -104,7 +104,7 @@ export default function Index() {
       </Flex>
       <Flex justifySelf={"flex-end"}>
         <ChakraLink
-          href={"https://gitlab.com/"}
+          href={"https://gitlab.com/Niikolajj/website"}
           padding={4}
           _hover={{ color: "#ff6363" }}
           transition={"color 0.5s ease"}
