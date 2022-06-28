@@ -1,10 +1,11 @@
 {
-  "kind": "singleType",
+  "kind": "collectionType",
   "collectionName": "adresses",
   "info": {
     "singularName": "adress",
     "pluralName": "adresses",
-    "displayName": "adress"
+    "displayName": "adress",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -22,6 +23,12 @@
     },
     "city": {
       "type": "string"
+    },
+    "profiles": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::profile.profile",
+      "mappedBy": "adress"
     }
   }
 }

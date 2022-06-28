@@ -14,16 +14,10 @@ import SidebarElement from "./SidebarElement";
 import { elementType } from "./SidebarElement/element";
 import TimelineElement from "./TimelineElement";
 
-export default function Vitae({
-  profile,
-  theme,
-}: {
-  profile: any;
-  theme: any;
-}) {
-  const { personal, adress, birth, experience, prof } = profile;
-  const { strengths, software, languages, interests, summary } =
-    prof.data.attributes;
+export default function Vitae({ data, theme }: { data: any; theme: any }) {
+  const { profile, experience } = data;
+  const { personal, strengths, softwares, interests, summary, languages } =
+    profile.data.attributes;
   const { work, education, internships } = experience.data.attributes;
   return (
     <Flex
@@ -77,7 +71,7 @@ export default function Vitae({
             />
             <SidebarElement
               title={"Software"}
-              elements={software.data}
+              elements={softwares.data}
               theme={theme}
             />
             <SidebarElement

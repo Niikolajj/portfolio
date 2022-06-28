@@ -26,19 +26,13 @@ export async function loader({ params, request }: any) {
   );
   const results = await res.json();
   if (results.data.length > 0) {
-    const fetches = ["personal", "adress", "birth", "experience", "profile"];
+    const app = await fetchStrapi("main-application");
+    const response = await app.json();
     let profile = {};
-    await Promise.all(
-      fetches.map(async (curr) => {
-        const response = await fetchStrapi(curr);
-        const data = await response.json();
-        if (data.error) {
-          console.log(data.error);
-          throw new Response("Error getting data from Strapi", { status: 500 });
-        }
-        profile = { ...profile, [curr]: data };
-      })
-    );
+    profile = {
+      experience: response.data.attributes.experience,
+      profile: response.data.attributes.profile,
+    };
 
     return {
       profile: { ...profile },
@@ -49,8 +43,7 @@ export async function loader({ params, request }: any) {
 }
 
 export default function Index() {
-  const { profile, application } = useLoaderData();
-  const { personal, adress, birth, experience, profile: prof } = profile;
+  const { profile, experience } = useLoaderData();
 
   return (
     <Flex
@@ -79,9 +72,9 @@ export default function Index() {
       }}
     >
       <Flex width={"210mm"} fontSize={"12pt"}>
-        <CoverLetter profile={{ personal, adress }} company={application} />
+        <CoverLetter profile={{ profile }} company={null} />
         <Vitae
-          profile={{ personal, adress, birth, experience, prof }}
+          data={{ ...profile }}
           theme={{ backgroundColor: "#0dbd8b", color: "#FFF" }}
         />
       </Flex>

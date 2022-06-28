@@ -1,5 +1,5 @@
 {
-  "kind": "singleType",
+  "kind": "collectionType",
   "collectionName": "experiences",
   "info": {
     "singularName": "experience",
@@ -26,6 +26,12 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::occupation.occupation"
+    },
+    "applications": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::application.application",
+      "mappedBy": "experience"
     }
   }
 }

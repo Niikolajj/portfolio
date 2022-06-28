@@ -1,0 +1,26 @@
+{
+  "kind": "singleType",
+  "collectionName": "main_applications",
+  "info": {
+    "singularName": "main-application",
+    "pluralName": "main-applications",
+    "displayName": "mainApplication",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "experience": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::experience.experience"
+    },
+    "profile": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::profile.profile"
+    }
+  }
+}

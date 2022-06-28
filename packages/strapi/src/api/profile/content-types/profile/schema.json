@@ -1,5 +1,5 @@
 {
-  "kind": "singleType",
+  "kind": "collectionType",
   "collectionName": "profiles",
   "info": {
     "singularName": "profile",
@@ -16,20 +16,29 @@
     }
   },
   "attributes": {
-    "languages": {
+    "personal": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::language-value.language-value"
-    },
-    "software": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::value.value"
+      "relation": "manyToOne",
+      "target": "api::personal.personal",
+      "inversedBy": "profiles"
     },
     "strengths": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::value.value"
+      "relation": "manyToMany",
+      "target": "api::value.value",
+      "inversedBy": "profilesStrengths"
+    },
+    "interests": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::value.value",
+      "inversedBy": "profileInterests"
+    },
+    "softwares": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::value.value",
+      "inversedBy": "profileSoftwares"
     },
     "summary": {
       "pluginOptions": {
@@ -39,10 +48,17 @@
       },
       "type": "text"
     },
-    "interests": {
+    "languages": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::value.value"
+      "relation": "manyToMany",
+      "target": "api::language-value.language-value",
+      "inversedBy": "profiles"
+    },
+    "adress": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::adress.adress",
+      "inversedBy": "profiles"
     }
   }
 }

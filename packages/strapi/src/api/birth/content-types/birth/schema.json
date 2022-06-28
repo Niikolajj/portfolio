@@ -1,10 +1,11 @@
 {
-  "kind": "singleType",
+  "kind": "collectionType",
   "collectionName": "births",
   "info": {
     "singularName": "birth",
     "pluralName": "births",
-    "displayName": "Birth"
+    "displayName": "Birth",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false

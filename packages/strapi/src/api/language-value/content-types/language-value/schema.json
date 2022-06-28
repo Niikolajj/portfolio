@@ -30,6 +30,12 @@
         }
       },
       "type": "integer"
+    },
+    "profiles": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::profile.profile",
+      "mappedBy": "languages"
     }
   }
 }

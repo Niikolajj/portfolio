@@ -4,7 +4,8 @@
   "info": {
     "singularName": "application",
     "pluralName": "applications",
-    "displayName": "Application"
+    "displayName": "Application",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -15,6 +16,17 @@
       "type": "string",
       "unique": true,
       "required": true
+    },
+    "profile": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::profile.profile"
+    },
+    "experience": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::experience.experience",
+      "inversedBy": "applications"
     }
   }
 }
