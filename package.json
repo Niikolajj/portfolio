@@ -12,5 +12,6 @@
     "server": "yarn workspace strapi develop",
     "client": "yarn workspace remix dev",
     "dev": "concurrently --kill-others-on-fail -c 'bgGreen.black,bgBlue.black' \"yarn:server\" \"yarn:client\""
-  }
+  },
+  "packageManager": "yarn@3.2.1"
 }
