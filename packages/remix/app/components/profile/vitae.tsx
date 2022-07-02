@@ -9,12 +9,18 @@ import {
   HStack,
 } from "@chakra-ui/react";
 import { Link, useLoaderData } from "@remix-run/react";
-import { fetchStrapi } from "~/api/strapi";
+import { applicationType, fetchStrapi } from "~/api/strapi";
+import { themeType } from "~/routes/profile";
 import SidebarElement from "./SidebarElement";
 import { elementType } from "./SidebarElement/element";
 import TimelineElement from "./TimelineElement";
 
-export default function Vitae({ data, theme }: { data: any; theme: any }) {
+type viteaProps = {
+  data: applicationType;
+  theme: themeType;
+};
+
+export default function Vitae({ data, theme }: viteaProps) {
   const { profile, experience } = data;
   const { personal, strengths, softwares, interests, summary, languages } =
     profile;

@@ -1,25 +1,16 @@
 import { Box, Flex, Heading, VStack, Text } from "@chakra-ui/react";
+import { occupationType, organizationType } from "~/api/strapi";
+import { themeType } from "~/routes/profile";
 import Element from "./element";
 import List from "./list";
 
 type timelineData = {
   title: string;
-  elements: elementData[];
+  elements: occupationType[];
+  theme: themeType;
 };
 
-export type companyData = {
-  name: string;
-  location: string;
-};
-
-export type elementData = {
-  date: string | { start: string; end: string };
-  title: string;
-  organization: companyData;
-  tasks?: string[];
-};
-
-export default function index({ title, elements, theme }: any) {
+export default function index({ title, elements, theme }: timelineData) {
   const display =
     typeof elements === "object" ? (
       <List elements={elements} />

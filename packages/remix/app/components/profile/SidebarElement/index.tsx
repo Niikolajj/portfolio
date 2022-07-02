@@ -1,20 +1,22 @@
 import { Box, Flex, Heading, VStack } from "@chakra-ui/react";
+import { strapiValueType } from "~/api/strapi";
+import { themeType } from "~/routes/profile";
 import Element from "./element";
 import { elementConfig } from "./element";
 
-type sidebarData = {
+type sidebarProps = {
   title: string;
-  elements: elementData[];
+  elements: strapiValueType[];
   config: elementConfig;
+  theme: themeType;
 };
 
-export type elementData = {
-  value: string | number;
-  label?: string;
-  icon?: string;
-};
-
-export default function index({ title, elements, config, theme }: any) {
+export default function index({
+  title,
+  elements,
+  config,
+  theme,
+}: sidebarProps) {
   return (
     <VStack direction={"column"} alignItems={"stretch"} spacing={1}>
       <Heading
@@ -28,7 +30,7 @@ export default function index({ title, elements, config, theme }: any) {
         {title}
       </Heading>
       <VStack alignItems={"stretch"} spacing={0}>
-        {elements.map((element: any, index: number) => {
+        {elements.map((element, index: number) => {
           return (
             <Element
               element={element}

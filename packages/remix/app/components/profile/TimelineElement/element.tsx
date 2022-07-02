@@ -10,13 +10,13 @@ import {
   VStack,
   Spacer,
 } from "@chakra-ui/react";
-import type { elementData } from ".";
+import { occupationType } from "~/api/strapi";
 
 type elementProps = {
-  element: elementData;
+  element: occupationType;
 };
 
-export default function Element({ element }: any) {
+export default function Element({ element }: elementProps) {
   const { start, end } = element.date_range;
   const startDate = new Date(start).toLocaleDateString("en-US", {
     month: "short",

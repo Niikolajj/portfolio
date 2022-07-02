@@ -1,8 +1,13 @@
 import React from "react";
+import { occupationType } from "~/api/strapi";
 import Element from "./element";
 
-export default function list({ elements }: any) {
-  return elements.map((element: any, index: number) => {
+type listProps = {
+  elements: occupationType[];
+};
+
+export default function list({ elements }: listProps) {
+  return elements.map((element, index: number) => {
     return <Element element={element} key={index} />;
   });
 }

@@ -3,6 +3,8 @@ import type { elementData } from ".";
 import { MdEmail, MdLabel, MdLocationPin, MdPhone } from "react-icons/md";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import type { IconType } from "react-icons";
+import { themeType } from "~/routes/profile";
+import { strapiValueType } from "~/api/strapi";
 
 export enum elementType {
   Rating,
@@ -16,9 +18,9 @@ export type elementConfig = {
 };
 
 export type elementProps = {
-  element: elementData;
+  element: strapiValueType;
   config: elementConfig;
-  theme: any;
+  theme: themeType;
 };
 
 const icons: { [key: string]: IconType } = {
@@ -49,19 +51,23 @@ export default function Element({ element, config = {}, theme }: elementProps) {
       valueOutput = value;
       break;
     case elementType.Rating:
-      valueOutput = Array.from(Array(6).keys()).map((index) => {
-        return (
-          <Flex
-            flexGrow={1}
-            height={"1rem"}
-            backgroundColor={
-              index < value ? theme?.backgroundColor ?? "gray.700" : "gray.300"
-            }
-            key={index}
-          />
-        );
-      });
-      break;
+      if (typeof value === "number") {
+        valueOutput = Array.from(Array(6).keys()).map((index) => {
+          return (
+            <Flex
+              flexGrow={1}
+              height={"1rem"}
+              backgroundColor={
+                index < value
+                  ? theme?.backgroundColor ?? "gray.700"
+                  : "gray.300"
+              }
+              key={index}
+            />
+          );
+        });
+        break;
+      }
   }
   return (
     <VStack

@@ -11,13 +11,15 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { Form, Link, useLoaderData } from "@remix-run/react";
-import { redirect } from "@remix-run/node";
-import { checkCode, fetchStrapi, getApplication } from "~/api/strapi";
+import { LoaderFunction, redirect } from "@remix-run/node";
+import { applicationType, checkCode, getApplication } from "~/api/strapi";
 import CoverLetter from "../../components/profile/coverLetter";
 import Vitae from "../../components/profile/vitae";
 import { userPrefs } from "~/cookie";
 
-export async function loader({ params, request }: any) {
+export const loader: LoaderFunction = async ({
+  request,
+}): Promise<applicationType | Response> => {
   const cookieHeader = request.headers.get("Cookie");
   const cookie = (await userPrefs.parse(cookieHeader)) || {};
   const code = cookie.applicationCode?.toString() ?? "";
@@ -28,11 +30,16 @@ export async function loader({ params, request }: any) {
     return application;
   }
   return redirect("/");
-}
+};
+
+export type themeType = {
+  backgroundColor: string;
+  color: string;
+};
 
 export default function Index() {
-  const application = useLoaderData();
-  const theme = {
+  const application: applicationType = useLoaderData();
+  const theme: themeType = {
     backgroundColor: application.company?.color ?? "#4EB393",
     color: "#FFF",
   };
