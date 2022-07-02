@@ -17,7 +17,7 @@ type elementProps = {
 };
 
 export default function Element({ element }: any) {
-  const { start, end } = element.date_range.data.attributes;
+  const { start, end } = element.date_range;
   const startDate = new Date(start).toLocaleDateString("en-US", {
     month: "short",
     year: "2-digit",
@@ -56,13 +56,13 @@ export default function Element({ element }: any) {
       <VStack flex={"0 1 87.5%"} alignItems={"flex-start"} spacing={1}>
         <Heading size="md">{element.title}</Heading>
         <HStack>
-          <Text>{element.organization.data.attributes.name}</Text>
+          <Text>{element.organization.name}</Text>
           <Text>-</Text>
-          <Text>{element.organization.data.attributes.location}</Text>
+          <Text>{element.organization.location}</Text>
         </HStack>
-        {element.tasks.data && (
+        {element.tasks && (
           <List>
-            {element.tasks.data.map((task, index) => {
+            {element.tasks.map((task, index) => {
               return (
                 <ListItem key={index}>
                   <Flex
@@ -72,7 +72,7 @@ export default function Element({ element }: any) {
                       paddingRight: "0.2rem",
                     }}
                   >
-                    {task.attributes.value}
+                    {task.value}
                   </Flex>
                 </ListItem>
               );

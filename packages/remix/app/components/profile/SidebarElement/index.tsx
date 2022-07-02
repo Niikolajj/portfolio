@@ -29,9 +29,7 @@ export default function index({ title, elements, config, theme }: any) {
       </Heading>
       <VStack alignItems={"stretch"} spacing={0}>
         {elements.map((element: any, index: number) => {
-          return (
-            <Element element={element.attributes} config={config} key={index} />
-          );
+          return <Element element={element} config={config} key={index} />;
         })}
       </VStack>
     </VStack>

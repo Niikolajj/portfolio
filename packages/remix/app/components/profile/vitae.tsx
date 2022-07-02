@@ -17,8 +17,8 @@ import TimelineElement from "./TimelineElement";
 export default function Vitae({ data, theme }: { data: any; theme: any }) {
   const { profile, experience } = data;
   const { personal, strengths, softwares, interests, summary, languages } =
-    profile.data.attributes;
-  const { work, education, internships } = experience.data.attributes;
+    profile;
+  const { work, education, internships } = experience;
   return (
     <Flex
       width={"210mm"}
@@ -44,9 +44,7 @@ export default function Vitae({ data, theme }: { data: any; theme: any }) {
           padding={4}
         >
           <Heading fontWeight={100} textAlign={"right"}>
-            {personal.data.attributes.firstName +
-              " " +
-              personal.data.attributes.lastName}
+            {personal.firstName + " " + personal.lastName}
           </Heading>
         </Box>
 
@@ -60,29 +58,29 @@ export default function Vitae({ data, theme }: { data: any; theme: any }) {
           >
             <SidebarElement
               title={"Contacts"}
-              elements={personal.data.attributes.contacts.data}
+              elements={personal.contacts}
               config={{ showIcon: true, showLabel: false }}
               theme={theme}
             />
             <SidebarElement
               title={"Skills"}
-              elements={strengths.data}
+              elements={strengths}
               theme={theme}
             />
             <SidebarElement
               title={"Software"}
-              elements={softwares.data}
+              elements={softwares}
               theme={theme}
             />
             <SidebarElement
               title={"Languages"}
               config={{ type: elementType.Rating, showLabel: true }}
-              elements={languages.data}
+              elements={languages}
               theme={theme}
             />
             <SidebarElement
               title={"Interests"}
-              elements={interests.data}
+              elements={interests}
               theme={theme}
             />
           </VStack>

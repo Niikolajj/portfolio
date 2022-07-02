@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { Form, Link, useLoaderData } from "@remix-run/react";
 import { redirect } from "@remix-run/node";
-import { fetchFindStrapi, fetchStrapi } from "~/api/strapi";
+import { checkCode, fetchStrapi, getApplication } from "~/api/strapi";
 import CoverLetter from "../../components/profile/coverLetter";
 import Vitae from "../../components/profile/vitae";
 import { userPrefs } from "~/cookie";
@@ -20,30 +20,18 @@ import { userPrefs } from "~/cookie";
 export async function loader({ params, request }: any) {
   const cookieHeader = request.headers.get("Cookie");
   const cookie = (await userPrefs.parse(cookieHeader)) || {};
-  const res = await fetchFindStrapi(
-    "applications",
-    cookie.applicationCode?.toString() ?? ""
-  );
-  const results = await res.json();
-  if (results.data.length > 0) {
-    const app = await fetchStrapi("main-application");
-    const response = await app.json();
-    let profile = {};
-    profile = {
-      experience: response.data.attributes.experience,
-      profile: response.data.attributes.profile,
-    };
+  const code = cookie.applicationCode?.toString() ?? "";
 
-    return {
-      profile: { ...profile },
-      application: {},
-    };
+  if (await checkCode(code)) {
+    const application = await getApplication(code);
+
+    return application;
   }
   return redirect("/");
 }
 
 export default function Index() {
-  const { profile, experience } = useLoaderData();
+  const application = useLoaderData();
 
   return (
     <Flex
@@ -72,9 +60,9 @@ export default function Index() {
       }}
     >
       <Flex width={"210mm"} fontSize={"12pt"}>
-        <CoverLetter profile={{ profile }} company={null} />
+        <CoverLetter profile={{ application }} company={null} />
         <Vitae
-          data={{ ...profile }}
+          data={{ ...application }}
           theme={{ backgroundColor: "#0dbd8b", color: "#FFF" }}
         />
       </Flex>

@@ -22,7 +22,7 @@ export type elementData = {
 export default function index({ title, elements, theme }: any) {
   const display =
     typeof elements === "object" ? (
-      <List elements={elements.data} />
+      <List elements={elements} />
     ) : (
       <Text textAlign={"justify"}>{elements}</Text>
     );

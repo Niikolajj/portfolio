@@ -18,7 +18,7 @@ import { Form, Link, useActionData, useLoaderData } from "@remix-run/react";
 import { ActionFunction, json, redirect } from "@remix-run/node";
 import { userPrefs } from "~/cookie";
 import styles from "~/theme/animation.css";
-import { fetchFindStrapi } from "~/api/strapi";
+import { checkCode } from "~/api/strapi";
 
 export function links() {
   return [{ rel: "stylesheet", href: styles }];
@@ -27,18 +27,12 @@ export function links() {
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
   const values = Object.fromEntries(formData);
-  const res = await fetchFindStrapi(
-    "applications",
-    values.code?.toString() ?? ""
-  );
-  const results = await res.json();
 
-  if (results.data.length > 0) {
+  if (await checkCode(values.code?.toString() ?? "")) {
     const cookieHeader = request.headers.get("Cookie");
 
     const cookie = (await userPrefs.parse(cookieHeader)) || {};
     cookie.applicationCode = formData.get("code");
-
     return redirect("/profile", {
       headers: {
         "Set-Cookie": await userPrefs.serialize(cookie),
