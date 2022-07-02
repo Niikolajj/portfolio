@@ -1,22 +1,19 @@
-export const fetchStrapi = async (endpoint: string) => {
-  return await fetch(
-    `${process.env.STRAPI_URL_BASE}/api/${endpoint}?populate=deep`,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
-        "Content-Type": "application/json",
-      },
-    }
-  );
+export const fetchStrapi = async (endpoint: string): Promise<Response> => {
+  return fetch(`${process.env.STRAPI_URL_BASE}/api/${endpoint}?populate=deep`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
+      "Content-Type": "application/json",
+    },
+  });
 };
 
 export const fetchFindStrapi = async (
   endpoint: string,
   field: string,
   search: string
-) => {
-  return await fetch(
+): Promise<Response> => {
+  return fetch(
     `${process.env.STRAPI_URL_BASE}/api/${endpoint}?populate=deep&filters[${field}][$eq]=${search}`,
     {
       method: "GET",
@@ -28,7 +25,9 @@ export const fetchFindStrapi = async (
   );
 };
 
-export const getApplication = async (code: string) => {
+export const getApplication = async (
+  code: string
+): Promise<applicationType> => {
   const mainResponse = await fetchStrapi("main-application");
   const response = await fetchFindStrapi("applications", "code", code);
 
@@ -45,10 +44,10 @@ export const getApplication = async (code: string) => {
   };
 };
 
-const override = (
-  base: { [key: string]: any },
-  overrides: { [key: string]: any }
-) => {
+const override = <T extends experienceType | profileType>(
+  base: T,
+  overrides: T
+): T => {
   for (const [key] of Object.entries(base)) {
     if (
       overrides &&
@@ -62,7 +61,7 @@ const override = (
   return base;
 };
 
-export const checkCode = async (code: string) => {
+export const checkCode = async (code: string): Promise<boolean> => {
   const response = await fetch(
     `${process.env.STRAPI_URL_BASE}/api/applications?filters[code][$eq]=${code}`,
     {
@@ -75,6 +74,65 @@ export const checkCode = async (code: string) => {
   );
   const results = await response.json();
   return results.data.length > 0;
+};
+
+export type applicationType = {
+  code?: string;
+  profile: profileType;
+  experience: experienceType;
+  company?: companyType;
+};
+
+export type profileType = {
+  [key: string]: any;
+  personal: {
+    firstName: string;
+    lastName: string;
+    sex: string;
+    contacts: strapiValueType[];
+  };
+  strengths: strapiValueType[];
+  interests: strapiValueType[];
+  software: strapiValueType[];
+  summary: string;
+  languages: languageValueType[];
+};
+
+export type strapiValueType = {
+  label?: string;
+  value: string;
+  icon?: string;
+};
+export type languageValueType = {
+  label: string;
+  value: number;
+};
+
+export type experienceType = {
+  [key: string]: any;
+  work: occupationType[];
+  education: occupationType[];
+  internships: occupationType[];
+};
+
+export type occupationType = {
+  date_range: {
+    start: string;
+    end: string;
+  };
+  title: string;
+  organization: organizationType;
+  tasks: strapiValueType[];
+};
+
+export type organizationType = {
+  name: string;
+  location: string;
+};
+
+export type companyType = {
+  color?: string;
+  name: string;
 };
 
 //from https://stackoverflow.com/questions/71063570/strapi-version-4-flatten-complex-response-structure
