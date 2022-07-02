@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "companies",
+  "info": {
+    "singularName": "company",
+    "pluralName": "companies",
+    "displayName": "Company",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "color": {
+      "type": "string",
+      "regex": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
+    },
+    "application": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::application.application",
+      "inversedBy": "company"
+    },
+    "name": {
+      "type": "string"
+    }
+  }
+}

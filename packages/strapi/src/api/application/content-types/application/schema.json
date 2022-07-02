@@ -27,6 +27,12 @@
       "relation": "manyToOne",
       "target": "api::experience.experience",
       "inversedBy": "applications"
+    },
+    "company": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::company.company",
+      "mappedBy": "application"
     }
   }
 }

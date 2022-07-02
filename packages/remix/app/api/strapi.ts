@@ -36,11 +36,12 @@ export const getApplication = async (code: string) => {
     await mainResponse.json()
   );
 
-  const { profile, experience } = flattenObj(await response.json())[0];
+  const { profile, experience, company } = flattenObj(await response.json())[0];
 
   return {
     profile: override(mainProfile, profile),
     experience: override(mainExperience, experience),
+    company,
   };
 };
 

@@ -18,6 +18,7 @@ export type elementConfig = {
 export type elementProps = {
   element: elementData;
   config: elementConfig;
+  theme: any;
 };
 
 const icons: { [key: string]: IconType } = {
@@ -27,7 +28,7 @@ const icons: { [key: string]: IconType } = {
   default: MdLabel,
 };
 
-export default function Element({ element, config = {} }: elementProps) {
+export default function Element({ element, config = {}, theme }: elementProps) {
   const { label, value, icon } = element;
   const {
     showIcon = false,
@@ -53,7 +54,9 @@ export default function Element({ element, config = {} }: elementProps) {
           <Flex
             flexGrow={1}
             height={"1rem"}
-            backgroundColor={index < value ? "#0dbd8b" : "gray.300"}
+            backgroundColor={
+              index < value ? theme?.backgroundColor ?? "gray.700" : "gray.300"
+            }
             key={index}
           />
         );

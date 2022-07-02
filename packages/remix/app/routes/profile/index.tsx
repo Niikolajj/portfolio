@@ -32,6 +32,10 @@ export async function loader({ params, request }: any) {
 
 export default function Index() {
   const application = useLoaderData();
+  const theme = {
+    backgroundColor: application.company?.color ?? "#4EB393",
+    color: "#FFF",
+  };
 
   return (
     <Flex
@@ -61,10 +65,7 @@ export default function Index() {
     >
       <Flex width={"210mm"} fontSize={"12pt"}>
         <CoverLetter profile={{ application }} company={null} />
-        <Vitae
-          data={{ ...application }}
-          theme={{ backgroundColor: "#0dbd8b", color: "#FFF" }}
-        />
+        <Vitae data={{ ...application }} theme={theme} />
       </Flex>
     </Flex>
   );
