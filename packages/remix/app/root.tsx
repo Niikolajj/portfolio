@@ -10,7 +10,7 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-import { MetaFunction, LinksFunction } from "@remix-run/node"; // Depends on the runtime you choose
+import type { MetaFunction, LinksFunction } from "@remix-run/node"; // Depends on the runtime you choose
 import BaseTheme from "./theme/BaseTheme";
 
 import { ServerStyleContext, ClientStyleContext } from "./context";
@@ -52,7 +52,7 @@ const Document = withEmotionCache(
       });
       // reset cache to reapply global styles
       clientStyleData?.reset();
-    }, []);
+    }, [clientStyleData, emotionCache.sheet]);
 
     return (
       <html lang="en">

@@ -1,8 +1,8 @@
-import { Box, Flex, Heading, VStack } from "@chakra-ui/react";
-import { strapiValueType } from "~/api/strapi";
-import { themeType } from "~/routes/profile";
+import { Heading, VStack } from "@chakra-ui/react";
+import type { strapiValueType } from "~/api/strapi";
+import type { themeType } from "~/routes/profile";
 import Element from "./element";
-import { elementConfig } from "./element";
+import type { elementConfig } from "./element";
 
 type sidebarProps = {
   title: string;

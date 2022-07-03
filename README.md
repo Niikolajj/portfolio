@@ -18,7 +18,7 @@ create api key in strapi, copy that to remix .env
 - Autoseed database with example profile data
 - ~~Create application specific overrides for profile~~
 - Fix mobile view
-- Add linter and fix code style
+- ~~Add linter and fix code style~~
 - Add testing
 - Handle errors
 - (Switch to GraphQL for strapi data fetching)

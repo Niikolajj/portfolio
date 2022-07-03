@@ -1,16 +1,6 @@
-import {
-  Box,
-  Heading,
-  Flex,
-  Link as ChakraLink,
-  VStack,
-  Text,
-  Spacer,
-  HStack,
-} from "@chakra-ui/react";
-import { Link, useLoaderData } from "@remix-run/react";
-import { applicationType, fetchStrapi } from "~/api/strapi";
-import { themeType } from "~/routes/profile";
+import { Box, Heading, Flex, VStack, HStack } from "@chakra-ui/react";
+import type { applicationType } from "~/api/strapi";
+import type { themeType } from "~/routes/profile";
 import SidebarElement from "./SidebarElement";
 import { elementType } from "./SidebarElement/element";
 import TimelineElement from "./TimelineElement";

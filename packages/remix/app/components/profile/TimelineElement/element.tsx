@@ -4,13 +4,11 @@ import {
   Flex,
   List,
   ListItem,
-  ListIcon,
   HStack,
   StackDivider,
   VStack,
-  Spacer,
 } from "@chakra-ui/react";
-import { occupationType } from "~/api/strapi";
+import type { occupationType } from "~/api/strapi";
 
 type elementProps = {
   element: occupationType;

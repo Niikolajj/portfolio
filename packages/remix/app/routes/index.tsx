@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   FormControl,
   FormLabel,
@@ -9,13 +8,12 @@ import {
   Flex,
   Link as ChakraLink,
   VStack,
-  Spacer,
   useColorModeValue,
-  FormHelperText,
   FormErrorMessage,
 } from "@chakra-ui/react";
-import { Form, Link, useActionData, useLoaderData } from "@remix-run/react";
-import { ActionFunction, json, redirect } from "@remix-run/node";
+import { Form, useActionData } from "@remix-run/react";
+import type { ActionFunction } from "@remix-run/node";
+import { json, redirect } from "@remix-run/node";
 import { userPrefs } from "~/cookie";
 import styles from "~/theme/animation.css";
 import { checkCode } from "~/api/strapi";

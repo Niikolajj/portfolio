@@ -1,12 +1,11 @@
-import { Box, Flex, Heading, VStack, Text } from "@chakra-ui/react";
-import { occupationType, organizationType } from "~/api/strapi";
-import { themeType } from "~/routes/profile";
-import Element from "./element";
+import { Heading, VStack, Text } from "@chakra-ui/react";
+import type { occupationType } from "~/api/strapi";
+import type { themeType } from "~/routes/profile";
 import List from "./list";
 
 type timelineData = {
   title: string;
-  elements: occupationType[];
+  elements: occupationType[] | string;
   theme: themeType;
 };
 

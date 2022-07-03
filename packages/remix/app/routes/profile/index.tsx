@@ -1,18 +1,9 @@
-import {
-  Box,
-  Button,
-  Flex,
-  FormControl,
-  FormLabel,
-  Heading,
-  HStack,
-  Input,
-  Link as ChakraLink,
-  VStack,
-} from "@chakra-ui/react";
-import { Form, Link, useLoaderData } from "@remix-run/react";
-import { LoaderFunction, redirect } from "@remix-run/node";
-import { applicationType, checkCode, getApplication } from "~/api/strapi";
+import { Flex } from "@chakra-ui/react";
+import { useLoaderData } from "@remix-run/react";
+import type { LoaderFunction } from "@remix-run/node";
+import { redirect } from "@remix-run/node";
+import type { applicationType } from "~/api/strapi";
+import { checkCode, getApplication } from "~/api/strapi";
 import CoverLetter from "../../components/profile/coverLetter";
 import Vitae from "../../components/profile/vitae";
 import { userPrefs } from "~/cookie";

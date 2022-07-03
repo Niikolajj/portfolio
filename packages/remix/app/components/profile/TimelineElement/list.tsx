@@ -1,5 +1,4 @@
-import React from "react";
-import { occupationType } from "~/api/strapi";
+import type { occupationType } from "~/api/strapi";
 import Element from "./element";
 
 type listProps = {
@@ -7,7 +6,11 @@ type listProps = {
 };
 
 export default function list({ elements }: listProps) {
-  return elements.map((element, index: number) => {
-    return <Element element={element} key={index} />;
-  });
+  return (
+    <>
+      {elements.map((element, index: number) => {
+        return <Element element={element} key={index} />;
+      })}
+    </>
+  );
 }

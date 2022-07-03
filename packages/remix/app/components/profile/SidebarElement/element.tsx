@@ -1,10 +1,8 @@
 import { Flex, HStack, Text, VStack } from "@chakra-ui/react";
-import type { elementData } from ".";
 import { MdEmail, MdLabel, MdLocationPin, MdPhone } from "react-icons/md";
-import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import type { IconType } from "react-icons";
-import { themeType } from "~/routes/profile";
-import { strapiValueType } from "~/api/strapi";
+import type { themeType } from "~/routes/profile";
+import type { strapiValueType } from "~/api/strapi";
 
 export enum elementType {
   Rating,
