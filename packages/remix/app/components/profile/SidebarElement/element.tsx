@@ -2,7 +2,7 @@ import { Flex, HStack, Text, VStack } from "@chakra-ui/react";
 import { MdEmail, MdLabel, MdLocationPin, MdPhone } from "react-icons/md";
 import type { IconType } from "react-icons";
 import type { themeType } from "~/routes/profile";
-import type { strapiValueType } from "~/api/strapi";
+import type { languageValueType, strapiValueType } from "~/api/strapi";
 
 export enum elementType {
   Rating,
@@ -16,8 +16,8 @@ export type elementConfig = {
 };
 
 export type elementProps = {
-  element: strapiValueType;
-  config: elementConfig;
+  element: strapiValueType | languageValueType;
+  config?: elementConfig;
   theme: themeType;
 };
 
@@ -29,7 +29,7 @@ const icons: { [key: string]: IconType } = {
 };
 
 export default function Element({ element, config = {}, theme }: elementProps) {
-  const { label, value, icon } = element;
+  const { label, value } = element;
   const {
     showIcon = false,
     showLabel = false,
@@ -41,7 +41,11 @@ export default function Element({ element, config = {}, theme }: elementProps) {
       ? { content: '">"', paddingRight: "0.2rem", fontWeight: "bold" }
       : {};
 
-  const IconOutput = icon ? icons[icon] : icons["default"];
+  let icon = "default";
+  if ("icon" in element) {
+    icon = element.icon ?? "default";
+  }
+  const IconOutput = icons[icon];
   let valueOutput;
 
   switch (type) {

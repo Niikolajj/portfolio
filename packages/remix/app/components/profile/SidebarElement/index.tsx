@@ -1,13 +1,13 @@
 import { Heading, VStack } from "@chakra-ui/react";
-import type { strapiValueType } from "~/api/strapi";
+import type { languageValueType, strapiValueType } from "~/api/strapi";
 import type { themeType } from "~/routes/profile";
 import Element from "./element";
 import type { elementConfig } from "./element";
 
 type sidebarProps = {
   title: string;
-  elements: strapiValueType[];
-  config: elementConfig;
+  elements: strapiValueType[] | languageValueType[];
+  config?: elementConfig;
   theme: themeType;
 };
 
