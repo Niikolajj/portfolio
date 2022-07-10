@@ -3,6 +3,7 @@ import { useLoaderData } from "@remix-run/react";
 import type { LoaderFunction } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import type { applicationType } from "~/api/strapi";
+import { locales } from "~/api/strapi";
 import { checkCode, getApplication } from "~/api/strapi";
 import CoverLetter from "../../components/profile/coverLetter";
 import Vitae from "../../components/profile/vitae";
@@ -18,7 +19,18 @@ export const loader: LoaderFunction = async ({
   if (await checkCode(code)) {
     const application = await getApplication(code);
 
-    return application;
+    const pictureUrl = application.profile.personal.picture.formats.medium.url;
+    const response = await fetch(
+      (process.env.STRAPI_URL_BASE ?? "") + (pictureUrl ?? "")
+    );
+    const blob = await response.blob();
+    const buffer = Buffer.from(await blob.arrayBuffer());
+    const picture = buffer.toString("base64");
+
+    return {
+      ...application,
+      picture,
+    };
   }
   return redirect("/");
 };
@@ -26,6 +38,7 @@ export const loader: LoaderFunction = async ({
 export type themeType = {
   backgroundColor: string;
   color: string;
+  layout: locales;
 };
 
 export default function Index() {
@@ -33,6 +46,7 @@ export default function Index() {
   const theme: themeType = {
     backgroundColor: application.company?.color ?? "#4EB393",
     color: "#FFF",
+    layout: application.company?.locale ?? locales.German,
   };
 
   return (

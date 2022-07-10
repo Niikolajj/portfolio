@@ -81,6 +81,7 @@ export type applicationType = {
   profile: profileType;
   experience: experienceType;
   company?: companyType;
+  picture?: any;
 };
 
 export type profileType = {
@@ -90,12 +91,33 @@ export type profileType = {
     lastName: string;
     sex: string;
     contacts: strapiValueType[];
+    picture: pictureType;
   };
   strengths: strapiValueType[];
   interests: strapiValueType[];
   software: strapiValueType[];
   summary: string;
   languages: languageValueType[];
+};
+
+export type pictureType = {
+  formats: {
+    thumbnail: formatType;
+    large: formatType;
+    medium: formatType;
+    small: formatType;
+  };
+};
+
+export type formatType = {
+  name: string;
+  hash: string;
+  ext: string;
+  mime: string;
+  width: number;
+  height: number;
+  size: number;
+  url: string;
 };
 
 export type strapiValueType = {
@@ -133,7 +155,13 @@ export type organizationType = {
 export type companyType = {
   color?: string;
   name: string;
+  locale: locales;
 };
+
+export enum locales {
+  English = "en",
+  German = "de",
+}
 
 //from https://stackoverflow.com/questions/71063570/strapi-version-4-flatten-complex-response-structure
 export const flattenObj = (data: any) => {

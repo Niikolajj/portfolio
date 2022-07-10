@@ -24,6 +24,15 @@
     },
     "name": {
       "type": "string"
+    },
+    "locale": {
+      "type": "enumeration",
+      "enum": [
+        "en",
+        "de"
+      ],
+      "required": true,
+      "default": "de"
     }
   }
 }

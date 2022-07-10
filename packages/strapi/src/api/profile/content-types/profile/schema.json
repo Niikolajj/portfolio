@@ -53,12 +53,6 @@
       "relation": "manyToMany",
       "target": "api::language-value.language-value",
       "inversedBy": "profiles"
-    },
-    "adress": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::adress.adress",
-      "inversedBy": "profiles"
     }
   }
 }

@@ -15,7 +15,8 @@
     "code": {
       "type": "string",
       "unique": true,
-      "required": true
+      "required": true,
+      "pluginOptions": {}
     },
     "profile": {
       "type": "relation",

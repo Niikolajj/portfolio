@@ -1,8 +1,10 @@
 import { Box, Heading, Flex, VStack, HStack } from "@chakra-ui/react";
 import type { applicationType } from "~/api/strapi";
+import { locales } from "~/api/strapi";
 import type { themeType } from "~/routes/profile";
 import SidebarElement from "./SidebarElement";
 import { elementType } from "./SidebarElement/element";
+import Picture from "./SidebarElement/picture";
 import TimelineElement from "./TimelineElement";
 
 type viteaProps = {
@@ -11,7 +13,7 @@ type viteaProps = {
 };
 
 export default function Vitae({ data, theme }: viteaProps) {
-  const { profile, experience } = data;
+  const { profile, experience, picture } = data;
   const { personal, strengths, softwares, interests, summary, languages } =
     profile;
   const { work, education, internships } = experience;
@@ -33,6 +35,7 @@ export default function Vitae({ data, theme }: viteaProps) {
         height={"297mm"}
         minHeight={"297mm"}
         className={"subPage"}
+        overflow={"hidden"}
       >
         <Box
           backgroundColor={theme.backgroundColor ?? "gray.700"}
@@ -44,7 +47,7 @@ export default function Vitae({ data, theme }: viteaProps) {
           </Heading>
         </Box>
 
-        <HStack height={"100%"} alignItems={"stretch"} overflow={"hidden"}>
+        <HStack height={"100%"} alignItems={"stretch"} spacing={0}>
           <VStack
             direction={"column"}
             flexBasis={"33%"}
@@ -52,6 +55,9 @@ export default function Vitae({ data, theme }: viteaProps) {
             padding={2}
             spacing={2}
           >
+            {theme.layout === locales.German && (
+              <Picture picture={picture} theme={theme} />
+            )}
             <SidebarElement
               title={"Contacts"}
               elements={personal.contacts}
@@ -82,7 +88,7 @@ export default function Vitae({ data, theme }: viteaProps) {
           </VStack>
           <VStack
             direction={"column"}
-            flexBasis={"66%"}
+            flexBasis={"67%"}
             padding={2}
             backgroundColor={`gray.200`}
             spacing={2}

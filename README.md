@@ -22,4 +22,4 @@ create api key in strapi, copy that to remix .env
 - Add testing
 - Handle errors
 - (Switch to GraphQL for strapi data fetching)
-- Add German layout and locale
+- ~~Add German layout and locale~~
