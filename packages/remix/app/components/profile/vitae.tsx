@@ -17,6 +17,9 @@ export default function Vitae({ data, theme }: viteaProps) {
   const { personal, strengths, softwares, interests, summary, languages } =
     profile;
   const { work, education, internships } = experience;
+
+  const isGerman = theme.layout === locales.German;
+
   return (
     <Flex
       width={"210mm"}
@@ -55,17 +58,15 @@ export default function Vitae({ data, theme }: viteaProps) {
             padding={2}
             spacing={2}
           >
-            {theme.layout === locales.German && (
-              <Picture picture={picture} theme={theme} />
-            )}
+            {isGerman && <Picture picture={picture} theme={theme} />}
             <SidebarElement
-              title={"Contacts"}
+              title={isGerman ? "Kontakt" : "Contacts"}
               elements={personal.contacts}
               config={{ showIcon: true, showLabel: false }}
               theme={theme}
             />
             <SidebarElement
-              title={"Skills"}
+              title={isGerman ? "Fähigkeiten" : "Skills"}
               elements={strengths}
               theme={theme}
             />
@@ -75,13 +76,13 @@ export default function Vitae({ data, theme }: viteaProps) {
               theme={theme}
             />
             <SidebarElement
-              title={"Languages"}
+              title={isGerman ? "Sprachen" : "Languages"}
               config={{ type: elementType.Rating, showLabel: true }}
               elements={languages}
               theme={theme}
             />
             <SidebarElement
-              title={"Interests"}
+              title={isGerman ? "Interessen" : "Interests"}
               elements={interests}
               theme={theme}
             />
@@ -94,18 +95,22 @@ export default function Vitae({ data, theme }: viteaProps) {
             spacing={2}
           >
             <TimelineElement
-              title={"About me"}
+              title={isGerman ? "Über mich" : "About me"}
               elements={summary}
               theme={theme}
             />
-            <TimelineElement title={"Work"} elements={work} theme={theme} />
             <TimelineElement
-              title={"Education"}
+              title={isGerman ? "Arbeit" : "Work"}
+              elements={work}
+              theme={theme}
+            />
+            <TimelineElement
+              title={isGerman ? "Schule" : "Education"}
               elements={education}
               theme={theme}
             />
             <TimelineElement
-              title={"Internships"}
+              title={isGerman ? "Praktikas" : "Internships"}
               elements={internships}
               theme={theme}
             />

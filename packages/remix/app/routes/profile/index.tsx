@@ -11,7 +11,7 @@ import { userPrefs } from "~/cookie";
 
 export const loader: LoaderFunction = async ({
   request,
-}): Promise<applicationType | Response> => {
+}): Promise<profileType | Response> => {
   const cookieHeader = request.headers.get("Cookie");
   const cookie = (await userPrefs.parse(cookieHeader)) || {};
   const code = cookie.applicationCode?.toString() ?? "";
@@ -41,8 +41,10 @@ export type themeType = {
   layout: locales;
 };
 
+type profileType = applicationType;
+
 export default function Index() {
-  const application: applicationType = useLoaderData();
+  const application: profileType = useLoaderData();
   const theme: themeType = {
     backgroundColor: application.company?.color ?? "#4EB393",
     color: "#FFF",
