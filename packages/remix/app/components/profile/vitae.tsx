@@ -40,7 +40,7 @@ export default function Vitae({ data, theme }: viteaProps) {
           padding={2}
           spacing={2}
         >
-            {isGerman && <Picture picture={picture} theme={theme} />}
+          {isGerman && picture && <Picture picture={picture} theme={theme} />}
           <SidebarElement
             title={isGerman ? "Kontakt" : "Contacts"}
             elements={personal.contacts}

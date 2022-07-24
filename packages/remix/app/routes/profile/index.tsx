@@ -19,15 +19,17 @@ export const loader: LoaderFunction = async ({
 
   if (await checkCode(code)) {
     const application = await getApplication(code);
-
-    const pictureUrl = application.profile.personal.picture.formats.medium.url;
-    const response = await fetch(
-      (process.env.STRAPI_URL_BASE ?? "") + (pictureUrl ?? "")
-    );
-    const blob = await response.blob();
-    const buffer = Buffer.from(await blob.arrayBuffer());
-    const picture = buffer.toString("base64");
-
+    let picture;
+    if (application.profile.personal.picture) {
+      const pictureUrl =
+        application.profile.personal.picture.formats.medium.url;
+      const response = await fetch(
+        (process.env.STRAPI_URL_BASE ?? "") + (pictureUrl ?? "")
+      );
+      const blob = await response.blob();
+      const buffer = Buffer.from(await blob.arrayBuffer());
+      picture = buffer.toString("base64");
+    }
     return {
       ...application,
       picture,
@@ -76,6 +78,7 @@ export default function Index() {
       }}
     >
       <Page>
+        <CoverLetter application={application} theme={theme} />
       </Page>
       <Page>
         <Vitae data={application} theme={theme} />
