@@ -1,4 +1,4 @@
-import { Flex } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { useLoaderData } from "@remix-run/react";
 import type { LoaderFunction } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
@@ -8,6 +8,7 @@ import { checkCode, getApplication } from "~/api/strapi";
 import CoverLetter from "../../components/profile/coverLetter";
 import Vitae from "../../components/profile/vitae";
 import { userPrefs } from "~/cookie";
+import Page from "~/components/page";
 
 export const loader: LoaderFunction = async ({
   request,
@@ -52,10 +53,7 @@ export default function Index() {
   };
 
   return (
-    <Flex
-      direction={"column"}
-      alignItems={"center"}
-      justifyContent={"flex-start"}
+    <Box
       height={"100vh"}
       sx={{
         "@page": { size: "A4", margin: 0 },
@@ -77,10 +75,11 @@ export default function Index() {
         },
       }}
     >
-      <Flex width={"210mm"} fontSize={"12pt"}>
-        <CoverLetter profile={{ application }} company={null} />
-        <Vitae data={{ ...application }} theme={theme} />
-      </Flex>
-    </Flex>
+      <Page>
+      </Page>
+      <Page>
+        <Vitae data={application} theme={theme} />
+      </Page>
+    </Box>
   );
 }
