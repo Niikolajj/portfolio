@@ -196,8 +196,8 @@ export type coverLetterType = {
 };
 
 export enum locales {
-  English = "en",
-  German = "de",
+  English = "en-GB",
+  German = "de-DE",
 }
 
 //from https://stackoverflow.com/questions/71063570/strapi-version-4-flatten-complex-response-structure

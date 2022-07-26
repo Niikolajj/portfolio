@@ -80,7 +80,13 @@ export default function index({
         </VStack>
       </Box>
       <Text textAlign={"right"}>
-        {adress.city + ", " + new Date(date).toDateString()}
+        {adress.city +
+          ", " +
+          new Date(date).toLocaleDateString(recipient.locale, {
+            day: "numeric",
+            month: "long",
+            year: "2-digit",
+          })}
       </Text>
     </>
   );
