@@ -27,6 +27,7 @@ Done:
 - ~~Create application specific overrides for profile~~
 - ~~Add linter and fix code style~~
 - ~~Add German layout and locale~~
+- ~~Add cover letter generation~~
 
 Postponed/retracted:
 
