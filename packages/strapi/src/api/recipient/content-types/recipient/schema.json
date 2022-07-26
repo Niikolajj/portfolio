@@ -1,0 +1,55 @@
+{
+  "kind": "collectionType",
+  "collectionName": "recipients",
+  "info": {
+    "singularName": "recipient",
+    "pluralName": "recipients",
+    "displayName": "recipient",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "firstName": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "department": {
+      "type": "string"
+    },
+    "company": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::company.company",
+      "inversedBy": "recipient"
+    },
+    "application": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::application.application",
+      "inversedBy": "recipient"
+    },
+    "street": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "locale": {
+      "type": "enumeration",
+      "enum": [
+        "en",
+        "de"
+      ],
+      "required": true,
+      "default": "de"
+    }
+  }
+}

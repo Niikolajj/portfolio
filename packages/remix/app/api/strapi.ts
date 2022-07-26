@@ -31,16 +31,24 @@ export const getApplication = async (
   const mainResponse = await fetchStrapi("main-application");
   const response = await fetchFindStrapi("applications", "code", code);
 
-  const { profile: mainProfile, experience: mainExperience } = flattenObj(
-    await mainResponse.json()
-  );
+  const {
+    profile: mainProfile,
+    experience: mainExperience,
+    cover_letter: mainCoverLetter,
+  } = flattenObj(await mainResponse.json());
 
-  const { profile, experience, company } = flattenObj(await response.json())[0];
+  const {
+    profile,
+    experience,
+    recipient,
+    cover_letter: coverLetter,
+  } = flattenObj(await response.json())[0];
 
   return {
     profile: override(mainProfile, profile),
     experience: override(mainExperience, experience),
-    company,
+    recipient,
+    coverLetter: override(mainCoverLetter, coverLetter),
   };
 };
 
@@ -80,8 +88,9 @@ export type applicationType = {
   code?: string;
   profile: profileType;
   experience: experienceType;
-  company?: companyType;
+  recipient: recipientType;
   picture?: any;
+  coverLetter: coverLetterType;
 };
 
 export type profileType = {
@@ -92,6 +101,7 @@ export type profileType = {
     sex: string;
     contacts: strapiValueType[];
     picture: pictureType;
+    adress: adressType;
   };
   strengths: strapiValueType[];
   interests: strapiValueType[];
@@ -107,6 +117,13 @@ export type pictureType = {
     medium: formatType;
     small: formatType;
   };
+};
+
+export type adressType = {
+  streetname: string;
+  housenumber: string;
+  city: string;
+  postcode: string;
 };
 
 export type formatType = {
@@ -152,10 +169,30 @@ export type organizationType = {
   location: string;
 };
 
+export type recipientType = {
+  company: companyType;
+  firstName: string;
+  lastName: string;
+  title: string;
+  department: string;
+  street: string;
+  city: string;
+  locale: locales;
+};
+
 export type companyType = {
   color?: string;
   name: string;
-  locale: locales;
+};
+
+export type coverLetterType = {
+  title: string;
+  opening: string;
+  body: string;
+  closing: string;
+  formalClosing: string;
+  greeting: string;
+  date: string;
 };
 
 export enum locales {

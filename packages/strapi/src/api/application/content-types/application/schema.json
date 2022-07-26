@@ -29,10 +29,16 @@
       "target": "api::experience.experience",
       "inversedBy": "applications"
     },
-    "company": {
+    "recipient": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::company.company",
+      "target": "api::recipient.recipient",
+      "mappedBy": "application"
+    },
+    "cover_letter": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::cover-letter.cover-letter",
       "mappedBy": "application"
     }
   }

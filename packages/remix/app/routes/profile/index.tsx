@@ -49,9 +49,9 @@ type profileType = applicationType;
 export default function Index() {
   const application: profileType = useLoaderData();
   const theme: themeType = {
-    backgroundColor: application.company?.color ?? "#4EB393",
+    backgroundColor: application.recipient.company?.color ?? "#4EB393",
     color: "#FFF",
-    layout: application.company?.locale ?? locales.German,
+    layout: application.recipient.locale ?? locales.German,
   };
 
   return (
@@ -77,9 +77,11 @@ export default function Index() {
         },
       }}
     >
-      <Page>
-        <CoverLetter application={application} theme={theme} />
-      </Page>
+      {application.coverLetter && (
+        <Page>
+          <CoverLetter application={application} theme={theme} />
+        </Page>
+      )}
       <Page>
         <Vitae data={application} theme={theme} />
       </Page>

@@ -1,4 +1,4 @@
-import { Box, Heading, Flex, VStack, HStack } from "@chakra-ui/react";
+import { Box, Heading, VStack, HStack } from "@chakra-ui/react";
 import type { applicationType } from "~/api/strapi";
 import { locales } from "~/api/strapi";
 import type { themeType } from "~/routes/profile";

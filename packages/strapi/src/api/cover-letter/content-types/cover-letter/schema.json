@@ -1,0 +1,44 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cover_letters",
+  "info": {
+    "singularName": "cover-letter",
+    "pluralName": "cover-letters",
+    "displayName": "CoverLetter",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "opening": {
+      "type": "richtext"
+    },
+    "body": {
+      "type": "richtext"
+    },
+    "closing": {
+      "type": "richtext"
+    },
+    "formalClosing": {
+      "type": "string"
+    },
+    "application": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::application.application",
+      "inversedBy": "cover_letter"
+    },
+    "greeting": {
+      "type": "string"
+    },
+    "date": {
+      "type": "date"
+    }
+  }
+}

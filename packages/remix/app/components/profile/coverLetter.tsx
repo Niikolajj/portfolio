@@ -1,11 +1,30 @@
-import { Box } from "@chakra-ui/react";
+import type { applicationType } from "~/api/strapi";
+import type { themeType } from "~/routes/profile";
+import Body from "./coverletter/body";
+import Header from "./coverletter/header";
 
 export default function CoverLetter({
-  profile,
-  company,
+  application,
+  theme,
 }: {
-  profile: any;
-  company: any;
+  application: applicationType;
+  theme: themeType;
 }) {
-  return <Box></Box>;
+  const { profile, recipient, coverLetter } = application;
+  return (
+    <>
+      <Header
+        personal={profile.personal}
+        theme={theme}
+        recipient={recipient}
+        date={coverLetter.date}
+      />
+      <Body
+        personal={profile.personal}
+        coverLetter={coverLetter}
+        recipient={recipient}
+        theme={theme}
+      />
+    </>
+  );
 }
