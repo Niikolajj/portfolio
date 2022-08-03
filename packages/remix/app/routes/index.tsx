@@ -1,22 +1,12 @@
-import {
-  Button,
-  FormControl,
-  FormLabel,
-  Heading,
-  HStack,
-  Input,
-  Flex,
-  Link as ChakraLink,
-  VStack,
-  useColorModeValue,
-  FormErrorMessage,
-} from "@chakra-ui/react";
-import { Form, useActionData } from "@remix-run/react";
+import { Heading, Flex, Text, useColorModeValue } from "@chakra-ui/react";
+import { useActionData } from "@remix-run/react";
 import type { ActionFunction } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { userPrefs } from "~/cookie";
 import styles from "~/theme/animation.css";
 import { checkCode } from "~/api/strapi";
+import { useRef, useState } from "react";
+import CodeInput from "~/components/page/codeInput";
 
 export function links() {
   return [{ rel: "stylesheet", href: styles }];
@@ -41,69 +31,45 @@ export const action: ActionFunction = async ({ request }) => {
   return json({ error, values });
 };
 
+const generateStripes = (
+  colour1: string,
+  colour2: string,
+  colour3: string
+): string => {
+  return `repeating-linear-gradient(-55deg, ${colour1}, ${colour1} calc(100%*0.4/6), ${colour2} calc(100%*0.4/6), ${colour2} calc(100%*1.5/6), ${colour3} calc(100%*1.5/6), ${colour3} calc(100%*2.5/6), ${colour1} calc(100%*2.5/6), ${colour1} calc(100%*2.75/6), ${colour2} calc(100%*2.75/6), ${colour2} calc(100%*4.5/6), ${colour3} calc(100%*4.5/6), ${colour3} calc(100%*5.5/6), ${colour1} calc(100%*5.5/6), ${colour1} 100%)`;
+};
+
 export default function Index() {
   const actionData = useActionData();
-  const formBackgroundColor = useColorModeValue("gray.300", "gray.700");
   const backgroundColor = useColorModeValue("gray.100", "gray.800");
-  const invalid = actionData && actionData.error !== undefined;
+  const primary = "#ef758a";
+  const secondary = "#7cc9c3";
 
   return (
-    <Flex
-      direction={"column"}
-      alignItems={"center"}
-      justifyContent={"space-between"}
-      height={"calc(var(--vh, 1vh) * 100)"}
-      backgroundColor={backgroundColor}
-    >
-      <Flex></Flex>
-      <Flex direction={"column"} gap={4}>
-        <Heading
-          size={"4xl"}
-          background={
-            "repeating-linear-gradient(-55deg, #ffbd69, #ffbd69 calc(100%*0.5/6), #ff6363 calc(100%*0.5/6), #ff6363 calc(100%*1.5/6), #543864 calc(100%*1.5/6), #543864 calc(100%*2.5/6), #ffbd69 calc(100%*2.5/6), #ffbd69 calc(100%*3.5/6), #ff6363 calc(100%*3.5/6), #ff6363 calc(100%*4.5/6), #543864 calc(100%*4.5/6), #543864 calc(100%*5.5/6), #ffbd69 calc(100%*5.5/6), #ffbd69 100%)"
-          }
-          backgroundSize={"200% auto"}
-          animation={"gradient 30s linear infinite"}
-          padding={2}
-          backgroundClip={"text"}
-        >
-          undefine.dev ~wip
-        </Heading>
-
-        <Form method="post" action=".">
-          <FormControl
-            as={VStack}
-            alignItems={"stretch"}
-            backgroundColor={formBackgroundColor}
-            padding={4}
-            borderRadius={6}
-            isInvalid={invalid}
-          >
-            <HStack justifyContent={"space-between"} alignItems={"flex-end"}>
-              <FormLabel htmlFor="code">Application code</FormLabel>
-            </HStack>
-            <HStack>
-              <Input name="code" type={"text"} autoFocus />
-              <Button type="submit" alignSelf={"flex-end"}>
-                Submit
-              </Button>
-            </HStack>
-            {invalid && (
-              <FormErrorMessage>{actionData.error?.name}</FormErrorMessage>
-            )}
-          </FormControl>
-        </Form>
+    <Flex direction={"column"} fontSize={["0.75rem", "1rem", "1.5rem"]}>
+      <Flex
+        direction={"column"}
+        alignItems={"flex-start"}
+        justifyContent={"center"}
+        minHeight={"calc(var(--vh, 1vh) * 100 - 2.5rem)"}
+        backgroundColor={backgroundColor}
+      >
+        <Flex direction={"column"}>
+          <Heading fontSize={"8em"} padding={3}>
+            Hi, <br /> this is <br />
+            <Text
+              as={"span"}
+              background={generateStripes("transparent", primary, secondary)}
+              backgroundSize={"400% auto"}
+              animation={"gradient 90s linear infinite"}
+              backgroundClip={"text"}
+            >
+              Nikolaj
+            </Text>
+          </Heading>
+        </Flex>
       </Flex>
-      <Flex justifySelf={"flex-end"}>
-        <ChakraLink
-          href={"https://gitlab.com/Niikolajj/website"}
-          padding={4}
-          _hover={{ color: "#ff6363" }}
-          transition={"color 0.5s ease"}
-        >
-          {"</>"}
-        </ChakraLink>
-      </Flex>
+      <CodeInput error={actionData?.error} />
     </Flex>
   );
 }
