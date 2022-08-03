@@ -19,4 +19,8 @@ export default extendTheme({
       },
     },
   },
+  config: {
+    initialColorMode: "dark",
+    useSystemColorMode: true,
+  },
 });
