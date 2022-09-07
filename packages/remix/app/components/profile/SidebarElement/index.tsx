@@ -22,10 +22,11 @@ export default function index({
       <Heading
         alignSelf={"flex-start"}
         backgroundColor={theme.backgroundColor ?? "gray.700"}
-        padding={2}
+        padding={1.5}
+        paddingLeft={2}
         paddingRight={6}
         color={theme.color ?? "white"}
-        size={"lg"}
+        fontSize={"1.44em"}
       >
         {title}
       </Heading>

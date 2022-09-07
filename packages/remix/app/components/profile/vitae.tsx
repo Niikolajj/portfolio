@@ -27,7 +27,7 @@ export default function Vitae({ data, theme }: viteaProps) {
         color={"white"}
         padding={4}
       >
-        <Heading fontWeight={100} textAlign={"right"}>
+        <Heading fontWeight={100} textAlign={"right"} fontSize={"1.8em"}>
           {personal.firstName + " " + personal.lastName}
         </Heading>
       </Box>

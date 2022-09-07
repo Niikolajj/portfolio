@@ -52,7 +52,7 @@ export default function Element({ element }: elementProps) {
         </VStack>
       </VStack>
       <VStack flex={"0 1 87.5%"} alignItems={"flex-start"} spacing={1}>
-        <Heading size="md">{element.title}</Heading>
+        <Heading fontSize={"1.2em"}>{element.title}</Heading>
         <HStack>
           <Text>{element.organization.name}</Text>
           <Text>-</Text>
