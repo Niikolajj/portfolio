@@ -65,6 +65,7 @@ export default function Element({ element, config = {}, theme }: elementProps) {
                   : "gray.300"
               }
               key={index}
+              marginBottom={1}
             />
           );
         });
