@@ -7,9 +7,23 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
+  "plugins": ["unused-imports"],
   "extends": [
     "@remix-run/eslint-config",
     "@remix-run/eslint-config/node",
     "prettier"
-  ]
+  ],
+  "rules": {
+    "no-unused-vars": "off",
+    "unused-imports/no-unused-imports": "warn",
+    "unused-imports/no-unused-vars": [
+      "warn",
+      {
+        "vars": "all",
+        "varsIgnorePattern": "^_",
+        "args": "after-used",
+        "argsIgnorePattern": "^_"
+      }
+    ]
+  }
 }
