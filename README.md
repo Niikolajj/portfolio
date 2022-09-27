@@ -16,10 +16,13 @@ create api key in strapi, copy that to remix .env
 
 Planned:
 
+- Add contact section
 - Handle errors
+- Image transcode for project texts, or direct links to backend
+- Animations
 - Add testing
 - Autoseed database with example profile data
-- Fix mobile view
+- Fix mobile view for cv
 
 Done:
 
