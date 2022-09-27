@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_portfolio_contact_mes",
+  "info": {
+    "displayName": "ContactMe",
+    "icon": "at",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "content": {
+      "type": "text"
+    },
+    "email": {
+      "type": "email"
+    },
+    "buttonText": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_portfolio_headers",
+  "info": {
+    "displayName": "Header",
+    "icon": "address-card",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "richtext"
+    },
+    "highlight": {
+      "type": "string"
+    }
+  }
+}

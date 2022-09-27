@@ -19,7 +19,6 @@ export const loader: LoaderFunction = async ({
 
   if (await checkCode(code)) {
     const application = await getApplication(code);
-    let picture;
     if (application.profile.personal.picture) {
       const pictureUrl =
         application.profile.personal.picture.formats.medium.url;
@@ -28,11 +27,10 @@ export const loader: LoaderFunction = async ({
       );
       const blob = await response.blob();
       const buffer = Buffer.from(await blob.arrayBuffer());
-      picture = buffer.toString("base64");
+      application.picture = buffer.toString("base64");
     }
     return {
-      ...application,
-      picture,
+      application
     };
   }
   return redirect("/");
@@ -44,10 +42,12 @@ export type themeType = {
   layout: locales;
 };
 
-type profileType = applicationType;
+type profileType = {
+  application: applicationType
+};
 
 export default function Index() {
-  const application: profileType = useLoaderData();
+  const { application } = useLoaderData();
   const theme: themeType = {
     backgroundColor: application.recipient.company?.color ?? "#4EB393",
     color: "#FFF",

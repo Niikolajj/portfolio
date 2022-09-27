@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_basic_text_elements",
+  "info": {
+    "displayName": "textElement",
+    "icon": "align-justify"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "body": {
+      "type": "richtext"
+    }
+  }
+}

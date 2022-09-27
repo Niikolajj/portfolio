@@ -17,7 +17,6 @@ create api key in strapi, copy that to remix .env
 Planned:
 
 - Handle errors
-- Portfolio of projects
 - Add testing
 - Autoseed database with example profile data
 - Fix mobile view
@@ -28,6 +27,7 @@ Done:
 - ~~Add linter and fix code style~~
 - ~~Add German layout and locale~~
 - ~~Add cover letter generation~~
+- ~~Portfolio of projects~~
 
 Postponed/retracted:
 

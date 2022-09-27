@@ -1,12 +1,30 @@
-import { Heading, Flex, Text, useColorModeValue } from "@chakra-ui/react";
-import { useActionData } from "@remix-run/react";
-import type { ActionFunction } from "@remix-run/node";
+import {
+  Flex,
+  useColorModeValue,
+  Container,
+  useTheme,
+} from "@chakra-ui/react";
+import {
+  useActionData,
+  useLoaderData,
+} from "@remix-run/react";
+import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { userPrefs } from "~/cookie";
 import styles from "~/theme/animation.css";
-import { checkCode } from "~/api/strapi";
-import { useRef, useState } from "react";
+import type {
+  portfolioType,
+  projectType} from "~/api/strapi";
+import {
+  checkCode,
+  getPortfolio,
+  getProjects
+} from "~/api/strapi";
 import CodeInput from "~/components/page/codeInput";
+import PortfolioText from "~/components/portfolio/text";
+import Header from "~/components/portfolio/header";
+import SkillList from "~/components/portfolio/skillList";
+import ProjectOverview from "~/components/portfolio/projectOverview";
 
 export function links() {
   return [{ rel: "stylesheet", href: styles }];
@@ -31,44 +49,49 @@ export const action: ActionFunction = async ({ request }) => {
   return json({ error, values });
 };
 
-const generateStripes = (
-  colour1: string,
-  colour2: string,
-  colour3: string
-): string => {
-  return `repeating-linear-gradient(-55deg, ${colour1}, ${colour1} calc(100%*0.4/6), ${colour2} calc(100%*0.4/6), ${colour2} calc(100%*1.5/6), ${colour3} calc(100%*1.5/6), ${colour3} calc(100%*2.5/6), ${colour1} calc(100%*2.5/6), ${colour1} calc(100%*2.75/6), ${colour2} calc(100%*2.75/6), ${colour2} calc(100%*4.5/6), ${colour3} calc(100%*4.5/6), ${colour3} calc(100%*5.5/6), ${colour1} calc(100%*5.5/6), ${colour1} 100%)`;
+export const loader: LoaderFunction = async (): Promise<{portfolio: portfolioType, projects: projectType[]}> => {
+  const portfolio = await getPortfolio();
+  const projects = await getProjects(6, { "sort[0]": "id%3Adesc" });
+  return { portfolio, projects };
 };
 
 export default function Index() {
   const actionData = useActionData();
+  const { portfolio, projects } = useLoaderData() ?? {};
+  const { header, aboutMe, skillList } = portfolio;
   const backgroundColor = useColorModeValue("gray.100", "gray.800");
-  const primary = "#ef758a";
-  const secondary = "#7cc9c3";
-
+  const { colors } = useTheme();
   return (
-    <Flex direction={"column"} fontSize={["0.75rem", "1rem", "1.5rem"]}>
-      <Flex
-        direction={"column"}
-        alignItems={"flex-start"}
-        justifyContent={"center"}
-        minHeight={"calc(var(--vh, 1vh) * 100 - 2.5rem)"}
-        backgroundColor={backgroundColor}
-      >
-        <Flex direction={"column"}>
-          <Heading fontSize={"8em"} padding={3}>
-            Hi, <br /> this is <br />
-            <Text
-              as={"span"}
-              background={generateStripes("transparent", primary, secondary)}
-              backgroundSize={"400% auto"}
-              animation={"gradient 90s linear infinite"}
-              backgroundClip={"text"}
-            >
-              Nikolaj
-            </Text>
-          </Heading>
-        </Flex>
-      </Flex>
+    <Flex
+      direction={"column"}
+      fontSize={["1rem", "1.2rem", "1.4rem"]}
+      gap={"1em"}
+      backgroundColor={backgroundColor}
+    >
+      {header && (
+        <Container maxWidth={"container.xl"}>
+          <Header
+            richText={header.text}
+            highlight={header.highlight}
+            colors={{
+              colour1: "transparent",
+              colour2: colors.highlight,
+              colour3: colors.highdark,
+            }}
+          />
+        </Container>
+      )}
+      <Container maxWidth={"container.xl"} marginTop={"-1em"} justifySelf={"flex-start"}>
+        <PortfolioText richText={aboutMe?.body} />
+      </Container>
+      {skillList && (
+        <Container maxWidth={"container.xl"}>
+          <SkillList skillList={skillList} />
+        </Container>
+      )}
+      {projects && (<Container maxWidth={"container.xl"}>
+        <ProjectOverview projects={projects}/>
+      </Container>)}
       <CodeInput error={actionData?.error} />
     </Flex>
   );

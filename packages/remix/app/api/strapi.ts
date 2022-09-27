@@ -1,20 +1,12 @@
-export const fetchStrapi = async (endpoint: string): Promise<Response> => {
-  return fetch(`${process.env.STRAPI_URL_BASE}/api/${endpoint}?populate=deep`, {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
-      "Content-Type": "application/json",
-    },
-  });
-};
-
-export const fetchFindStrapi = async (
+export const fetchStrapi = async <T>(
   endpoint: string,
-  field: string,
-  search: string
-): Promise<Response> => {
-  return fetch(
-    `${process.env.STRAPI_URL_BASE}/api/${endpoint}?populate=deep&filters[${field}][$eq]=${search}`,
+  parameters: { [key: string]: string | number } = {}
+): Promise<T> => {
+  const paramString = Object.keys(parameters)
+    .map((key) => `${key}=${parameters[key]}`)
+    .join("&");
+  const response = await fetch(
+    `${process.env.STRAPI_URL_BASE}/api/${endpoint}?${paramString}`,
     {
       method: "GET",
       headers: {
@@ -23,26 +15,73 @@ export const fetchFindStrapi = async (
       },
     }
   );
+  return flattenObj(await response.json());
+};
+
+export const fetchFindStrapi = async <T>(
+  endpoint: string,
+  field: string,
+  search: string,
+  parameters: {} = {}
+): Promise<T> => {
+  const filter = `filters[${field}][$eq]`;
+  return fetchStrapi<T>(endpoint, { ...parameters, [filter]: search });
+};
+
+export const getProjectsByTag = async (tag: string): Promise<tagType[]> => {
+  return fetchFindStrapi<tagType[]>("tags", "slug", tag, {
+    "populate[0]": "projects",
+  });
+};
+
+export const getProjectBySlug = async (
+  slug: string
+): Promise<projectType[]> => {
+  return fetchFindStrapi("projects", "slug", slug);
+};
+
+export const getProjects = async (
+  limit: number = 99,
+  parameters: {} = {}
+): Promise<projectType[]> => {
+  return fetchStrapi("projects", {
+    populate: "deep",
+    "pagination[pageSize]": limit,
+    ...parameters,
+  });
+};
+
+export const getTags = async () => {
+  return fetchStrapi<tagType[]>("tags", { populate: "deep" });
 };
 
 export const getApplication = async (
   code: string
 ): Promise<applicationType> => {
-  const mainResponse = await fetchStrapi("main-application");
-  const response = await fetchFindStrapi("applications", "code", code);
+  const mainResponse = await fetchStrapi<applicationType>("main-application", {
+    populate: "deep",
+  });
+  const response = await fetchFindStrapi<applicationType[]>(
+    "applications",
+    "code",
+    code,
+    {
+      populate: "deep",
+    }
+  );
 
   const {
     profile: mainProfile,
     experience: mainExperience,
     cover_letter: mainCoverLetter,
-  } = flattenObj(await mainResponse.json());
+  } = mainResponse;
 
   const {
     profile,
     experience,
     recipient,
     cover_letter: coverLetter,
-  } = flattenObj(await response.json())[0];
+  } = response[0];
 
   return {
     profile: override(mainProfile, profile),
@@ -52,11 +91,15 @@ export const getApplication = async (
   };
 };
 
-const override = <T extends experienceType | profileType>(
+export const getPortfolio = async () => {
+  return await fetchStrapi<portfolioType>("portfolio", { populate: "deep" });
+};
+
+const override = <T extends experienceType | profileType | coverLetterType>(
   base: T,
   overrides: T
 ): T => {
-  for (const [key] of Object.entries(base)) {
+  for (const [key] of Object.entries(base ?? {})) {
     if (
       overrides &&
       key in overrides &&
@@ -69,19 +112,17 @@ const override = <T extends experienceType | profileType>(
   return base;
 };
 
-export const checkCode = async (code: string): Promise<boolean> => {
-  const response = await fetch(
-    `${process.env.STRAPI_URL_BASE}/api/applications?filters[code][$eq]=${code}`,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
-        "Content-Type": "application/json",
-      },
-    }
+export const checkCode = async (
+  code: string,
+  parameters: {} = {}
+): Promise<boolean> => {
+  const codeResponse = await fetchFindStrapi<applicationType[]>(
+    "applications",
+    "code",
+    code,
+    parameters
   );
-  const results = await response.json();
-  return results.data.length > 0;
+  return codeResponse.length > 0;
 };
 
 export type applicationType = {
@@ -91,10 +132,9 @@ export type applicationType = {
   recipient: recipientType;
   picture?: any;
   coverLetter: coverLetterType;
-};
+} & { [key: string]: any };
 
 export type profileType = {
-  [key: string]: any;
   personal: {
     firstName: string;
     lastName: string;
@@ -108,7 +148,7 @@ export type profileType = {
   software: strapiValueType[];
   summary: string;
   languages: languageValueType[];
-};
+} & { [key: string]: any };
 
 export type pictureType = {
   formats: {
@@ -193,13 +233,72 @@ export type coverLetterType = {
   formalClosing: string;
   greeting: string;
   date: string;
-};
+} & { [key: string]: any };
 
 export enum locales {
   English = "en-GB",
   German = "de-DE",
 }
 
+export type portfolioType = {
+  header?: headerType;
+  aboutMe?: textElementType;
+  skillList: tagListType;
+};
+
+export type headerType = {
+  text: string;
+  highlight: string;
+};
+
+export type textElementType = {
+  title: string;
+  body: string;
+};
+
+export type tagListType = {
+  leftList: tagType[];
+  leftTitle: string;
+  middleList: tagType[];
+  middleTitle: string;
+  rightList: tagType[];
+  rightTitle: string;
+  title: string;
+};
+
+export type tagType = {
+  id: number;
+  title: string;
+  colour: string;
+  npmLink: string;
+  githubLink: string;
+  webLink: string;
+  link: boolean;
+  slug: string;
+  projects: projectType[];
+};
+
+export type projectType = {
+  id: number;
+  title: string;
+  description: string;
+  thumbnail: { url: string };
+  thumbnailBase?: string;
+  tags: tagType[];
+  status: projectStateType;
+  url: string;
+  repoUrl: string;
+  slug: string;
+  content: string;
+};
+
+export enum projectStateType {
+  "work in progress",
+  completed,
+  planned,
+  abandoned,
+  paused,
+}
 //from https://stackoverflow.com/questions/71063570/strapi-version-4-flatten-complex-response-structure
 export const flattenObj = (data: any) => {
   const isObject = (data: any) =>

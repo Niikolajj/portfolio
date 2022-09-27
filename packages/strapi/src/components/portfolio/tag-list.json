@@ -1,0 +1,38 @@
+{
+  "collectionName": "components_portfolio_tag_lists",
+  "info": {
+    "displayName": "tagList",
+    "icon": "indent",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "leftList": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::tag.tag"
+    },
+    "leftTitle": {
+      "type": "string"
+    },
+    "middleList": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::tag.tag"
+    },
+    "middleTitle": {
+      "type": "string"
+    },
+    "rightList": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::tag.tag"
+    },
+    "rightTitle": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    }
+  }
+}

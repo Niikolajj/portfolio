@@ -28,17 +28,17 @@
     "formalClosing": {
       "type": "string"
     },
-    "application": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::application.application",
-      "inversedBy": "cover_letter"
-    },
     "greeting": {
       "type": "string"
     },
     "date": {
       "type": "date"
+    },
+    "application": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::application.application",
+      "inversedBy": "coverLetter"
     }
   }
 }

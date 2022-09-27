@@ -19,17 +19,29 @@
       "type": "string",
       "maxLength": 6
     },
-    "subtags": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::tag.tag",
-      "inversedBy": "domtags"
+    "npmLink": {
+      "type": "string"
     },
-    "domtags": {
+    "githubLink": {
+      "type": "string"
+    },
+    "webLink": {
+      "type": "string"
+    },
+    "link": {
+      "type": "boolean",
+      "default": true
+    },
+    "slug": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "projects": {
       "type": "relation",
       "relation": "manyToMany",
-      "target": "api::tag.tag",
-      "inversedBy": "subtags"
+      "target": "api::project.project",
+      "mappedBy": "tags"
     }
   }
 }
