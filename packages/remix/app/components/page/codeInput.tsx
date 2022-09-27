@@ -64,6 +64,7 @@ export default function CodeInput({ error }: { error: any }) {
                 setValid(true);
               }}
               placeholder={"enter application code"}
+              _placeholder={{ color: "white" }}
             />
             <Button
               type="submit"
