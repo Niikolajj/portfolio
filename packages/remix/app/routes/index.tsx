@@ -51,7 +51,7 @@ export const action: ActionFunction = async ({ request }) => {
 
 export const loader: LoaderFunction = async (): Promise<{portfolio: portfolioType, projects: projectType[]}> => {
   const portfolio = await getPortfolio();
-  const projects = await getProjects(6, { "sort[0]": "id%3Adesc" });
+  const projects = await getProjects(6, { "sort[0]": "id%3Adesc", "pagination[pageSize]": 6 });
   return { portfolio, projects };
 };
 

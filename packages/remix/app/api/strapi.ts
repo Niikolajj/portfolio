@@ -45,14 +45,12 @@ export const getProjects = async (
   parameters: {} = {}
 ): Promise<projectType[]> => {
   return fetchStrapi("projects", {
-    populate: "deep",
-    "pagination[pageSize]": limit,
     ...parameters,
   });
 };
 
 export const getTags = async () => {
-  return fetchStrapi<tagType[]>("tags", { populate: "deep" });
+  return fetchStrapi<tagType[]>("tags", {"populate[0]":"projects"});
 };
 
 export const getApplication = async (

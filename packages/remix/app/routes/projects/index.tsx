@@ -10,7 +10,7 @@ import {
 import { ProjectList } from "~/components/portfolio/projects/projectList";
 
 export const loader: LoaderFunction = async (): Promise<{projects: projectType[]}> => {
-  const projects = await getProjects();
+  const projects = await getProjects(99,{"populate[0]": "thumbnail"});
 
   return { projects };
 };
