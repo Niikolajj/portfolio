@@ -30,7 +30,7 @@ export const fetchFindStrapi = async <T>(
 
 export const getProjectsByTag = async (tag: string): Promise<tagType[]> => {
   return fetchFindStrapi<tagType[]>("tags", "slug", tag, {
-    "populate[0]": "projects",
+    "populate[projects][populate][0]": "thumbnail",
   });
 };
 
