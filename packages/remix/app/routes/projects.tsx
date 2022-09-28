@@ -37,7 +37,7 @@ export default function Index() {
               {tags.map((tag: tagType) => {
                 return (
                   tag.projects.length > 0 && (
-                    <TagLink tag={tag} paramSlug={params.slug}/>
+                    <TagLink tag={tag} paramSlug={params.tagSlug}/>
                   )
                 );
               })}
