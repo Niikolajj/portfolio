@@ -29,6 +29,7 @@ export const ProjectList = ({ projects }: { projects: projectType[] }) => {
               rounded={"lg"}
               gap={1}
               pos={"relative"}
+              minHeight={"4em"}
             >
               <ChakraLink
                 as={Link}
