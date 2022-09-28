@@ -9,7 +9,6 @@ import {
 import { Link } from "@remix-run/react";
 import { FiGithub } from "react-icons/fi";
 import type { projectType } from "~/api/strapi";
-import { baseToSrc } from "~/utils/pictureToBase";
 
 export const ProjectList = ({ projects }: { projects: projectType[] }) => {
   const elementColor = useColorModeValue("gray.300", "gray.700");
@@ -42,8 +41,8 @@ export const ProjectList = ({ projects }: { projects: projectType[] }) => {
                   gap={2}
                   flexGrow={1}
                 >
-                  {project.thumbnailBase && <Flex height={"4em"} width={"4em"} flexShrink={1} justifyContent={"center"}>
-                    <Image src={baseToSrc(project.thumbnailBase)} maxHeight={"4em"} maxWidth={"4em"} filter={inverted} padding={"0.5em"} />
+                  {project.thumbnail && <Flex height={"4em"} width={"4em"} flexShrink={1} justifyContent={"center"}>
+                    <Image src={project.thumbnail.url} maxHeight={"4em"} maxWidth={"4em"} filter={inverted} padding={"0.5em"} />
                   </Flex>}
                   <Flex direction={"column"} flexGrow={1}>
                     <Heading size={"md"} marginBottom={0}>

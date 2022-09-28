@@ -18,7 +18,6 @@ Planned:
 
 - Add contact section
 - Handle errors
-- Image transcode for project texts, or direct links to backend
 - Animations
 - Add testing
 - Autoseed database with example profile data
@@ -31,6 +30,7 @@ Done:
 - ~~Add German layout and locale~~
 - ~~Add cover letter generation~~
 - ~~Portfolio of projects~~
+- ~~Image transcode for project texts, or direct links to backend~~
 
 Postponed/retracted:
 

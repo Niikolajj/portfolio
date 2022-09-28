@@ -8,16 +8,11 @@ import type { LoaderFunction } from "@remix-run/node";
 import type { tagType } from "~/api/strapi";
 import { getProjectsByTag } from "~/api/strapi";
 import { ProjectList } from "~/components/portfolio/projects/projectList";
-import { pictureToBase } from "~/utils/pictureToBase";
 
 export const loader: LoaderFunction = async ({ params }): Promise<{tag: tagType}> => {
   const slug = params.tagSlug;
   const tags = await getProjectsByTag(slug || "");
   const tag = tags[0]
-  for (const project of tag.projects) {
-    project.thumbnailBase = await pictureToBase(process.env.STRAPI_URL_BASE + project.thumbnail?.url)
-  }
-
   return { tag: tag };
 };
 

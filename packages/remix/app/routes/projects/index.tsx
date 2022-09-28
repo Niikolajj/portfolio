@@ -8,13 +8,10 @@ import {
   getProjects
 } from "~/api/strapi";
 import { ProjectList } from "~/components/portfolio/projects/projectList";
-import { pictureToBase } from "~/utils/pictureToBase";
 
 export const loader: LoaderFunction = async (): Promise<{projects: projectType[]}> => {
   const projects = await getProjects();
-  for (const project of projects) {
-    project.thumbnailBase = await pictureToBase(process.env.STRAPI_URL_BASE + project.thumbnail?.url)
-  }
+
   return { projects };
 };
 
