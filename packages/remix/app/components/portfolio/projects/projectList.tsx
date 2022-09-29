@@ -42,7 +42,7 @@ export const ProjectList = ({ projects }: { projects: projectType[] }) => {
                   flexGrow={1}
                 >
                   {project.thumbnail && <Flex height={"4em"} width={"4em"} flexShrink={1} justifyContent={"center"}>
-                    <Image src={project.thumbnail.url} maxHeight={"4em"} maxWidth={"4em"} filter={inverted} padding={"0.5em"} />
+                    <Image src={project.thumbnail.url} maxHeight={"4em"} maxWidth={"4em"} filter={inverted} padding={"0.5em"} display={["none", null, "block"]} />
                   </Flex>}
                   <Flex direction={"column"} flexGrow={1}>
                     <Heading size={"md"} marginBottom={0}>
