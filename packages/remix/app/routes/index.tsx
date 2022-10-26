@@ -42,13 +42,12 @@ export const loader: LoaderFunction = async (): Promise<loaderFunctionType> => {
     "sort[0]": "id%3Adesc",
     "pagination[pageSize]": 6,
   });
-  return { portfolio, projects, apiKey: process.env.LASTFM_API_KEY };
+  return { portfolio, projects };
 };
 
 type loaderFunctionType = {
   portfolio: portfolioType;
   projects: projectType[];
-  apiKey?: string;
 };
 
 export default function Index() {
