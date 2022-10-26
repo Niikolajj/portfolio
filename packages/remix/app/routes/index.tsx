@@ -1,30 +1,17 @@
-import {
-  Flex,
-  useColorModeValue,
-  Container,
-  useTheme,
-} from "@chakra-ui/react";
-import {
-  useActionData,
-  useLoaderData,
-} from "@remix-run/react";
+import { Flex, useColorModeValue, Container, useTheme } from "@chakra-ui/react";
+import { useActionData, useLoaderData } from "@remix-run/react";
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { userPrefs } from "~/cookie";
 import styles from "~/theme/animation.css";
-import type {
-  portfolioType,
-  projectType} from "~/api/strapi";
-import {
-  checkCode,
-  getPortfolio,
-  getProjects
-} from "~/api/strapi";
+import type { portfolioType, projectType } from "~/api/strapi";
+import { checkCode, getPortfolio, getProjects } from "~/api/strapi";
 import CodeInput from "~/components/page/codeInput";
 import PortfolioText from "~/components/portfolio/text";
 import Header from "~/components/portfolio/header";
 import SkillList from "~/components/portfolio/skillList";
 import ProjectOverview from "~/components/portfolio/projectOverview";
+import NowListening from "~/components/portfolio/nowListening";
 
 export function links() {
   return [{ rel: "stylesheet", href: styles }];
@@ -49,16 +36,25 @@ export const action: ActionFunction = async ({ request }) => {
   return json({ error, values });
 };
 
-export const loader: LoaderFunction = async (): Promise<{portfolio: portfolioType, projects: projectType[]}> => {
+export const loader: LoaderFunction = async (): Promise<loaderFunctionType> => {
   const portfolio = await getPortfolio();
-  const projects = await getProjects(6, { "sort[0]": "id%3Adesc", "pagination[pageSize]": 6 });
-  return { portfolio, projects };
+  const projects = await getProjects(6, {
+    "sort[0]": "id%3Adesc",
+    "pagination[pageSize]": 6,
+  });
+  return { portfolio, projects, apiKey: process.env.LASTFM_API_KEY };
+};
+
+type loaderFunctionType = {
+  portfolio: portfolioType;
+  projects: projectType[];
+  apiKey?: string;
 };
 
 export default function Index() {
   const actionData = useActionData();
-  const { portfolio, projects } = useLoaderData() ?? {};
-  const { header, aboutMe, skillList } = portfolio;
+  const { portfolio, projects } = useLoaderData<loaderFunctionType>() ?? {};
+  const { header, aboutMe, skillList, toLearnList, nowListening } = portfolio;
   const backgroundColor = useColorModeValue("gray.100", "gray.800");
   const { colors } = useTheme();
   return (
@@ -81,17 +77,32 @@ export default function Index() {
           />
         </Container>
       )}
-      <Container maxWidth={"container.xl"} marginTop={"-1em"} justifySelf={"flex-start"}>
-        <PortfolioText richText={aboutMe?.body} />
+      <Container
+        maxWidth={"container.xl"}
+        marginTop={"-1em"}
+        justifySelf={"flex-start"}
+      >
+        <Flex direction={"column"} gap={2}>
+          <PortfolioText richText={aboutMe?.body || ""} />
+          <NowListening
+            lastFMUsername={nowListening.lastFMUsername}
+            fallbackUrl={nowListening.fallbackUrl}
+          />
+        </Flex>
       </Container>
       {skillList && (
         <Container maxWidth={"container.xl"}>
-          <SkillList skillList={skillList} />
+          <Flex direction={"column"}>
+            <SkillList skillList={skillList} />
+            <PortfolioText richText={toLearnList?.body} />
+          </Flex>
         </Container>
       )}
-      {projects && (<Container maxWidth={"container.xl"}>
-        <ProjectOverview projects={projects}/>
-      </Container>)}
+      {projects && (
+        <Container maxWidth={"container.xl"}>
+          <ProjectOverview projects={projects} />
+        </Container>
+      )}
       <CodeInput error={actionData?.error} />
     </Flex>
   );

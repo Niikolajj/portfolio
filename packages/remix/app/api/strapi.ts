@@ -242,12 +242,19 @@ export type portfolioType = {
   header?: headerType;
   aboutMe?: textElementType;
   skillList: tagListType;
+  toLearnList: textElementType
+  nowListening: nowPlayingType;
 };
 
 export type headerType = {
   text: string;
   highlight: string;
 };
+
+export type nowPlayingType = {
+  lastFMUsername: string,
+  fallbackUrl: string
+}
 
 export type textElementType = {
   title: string;

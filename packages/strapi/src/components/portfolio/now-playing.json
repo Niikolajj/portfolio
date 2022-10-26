@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_portfolio_now_playings",
+  "info": {
+    "displayName": "nowPlaying",
+    "icon": "music"
+  },
+  "options": {},
+  "attributes": {
+    "lastFMUsername": {
+      "type": "string",
+      "required": true
+    },
+    "fallbackUrl": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

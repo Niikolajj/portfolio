@@ -47,6 +47,26 @@
       },
       "component": "portfolio.tag-list",
       "required": true
+    },
+    "toLearnList": {
+      "type": "component",
+      "repeatable": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "basic.text-element"
+    },
+    "nowListening": {
+      "type": "component",
+      "repeatable": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "portfolio.now-playing"
     }
   }
 }
