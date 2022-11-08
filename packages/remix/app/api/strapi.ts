@@ -71,14 +71,14 @@ export const getApplication = async (
   const {
     profile: mainProfile,
     experience: mainExperience,
-    cover_letter: mainCoverLetter,
+    coverLetter: mainCoverLetter,
   } = mainResponse;
 
   const {
     profile,
     experience,
     recipient,
-    cover_letter: coverLetter,
+    coverLetter,
   } = response[0];
 
   return {

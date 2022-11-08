@@ -22,7 +22,7 @@
       "relation": "oneToOne",
       "target": "api::profile.profile"
     },
-    "cover_letter": {
+    "coverLetter": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::cover-letter.cover-letter"
