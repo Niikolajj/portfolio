@@ -10,10 +10,12 @@ export default function useNowPlaying(username: string) {
       try {
         const result = await fetch("/api/nowPlaying/" + username)
         const songs: lastFMResponse = await result.json()
-        if(songs.recenttracks.track[0]["@attr"]) {
-          setSong(songs.recenttracks?.track[0])
+        if("recenttracks" in songs) {
+          if(("@attr" in songs.recenttracks.track[0] || ("date" in songs.recenttracks.track[0] && (new Date(songs.recenttracks.track[0].date["#text"]).getTime()) < (new Date().getTime() - 120 * 1000)))) {
+            setSong(songs.recenttracks?.track[0])
+          }
         }
-        else {
+        else if(!("error" in songs)) {
           setSong(null)
         }
       } catch (error) {

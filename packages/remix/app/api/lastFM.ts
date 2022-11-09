@@ -7,12 +7,20 @@ export const fetchLastFM = async (username?: string): Promise<lastFMResponse> =>
   return songs
 }
 
-export type lastFMResponse = {
+export type lastFMResponse = lastFMResponseSongs | lastFMResponseError
+
+type lastFMResponseSongs = {
   recenttracks: {
     "@attr": lastFMUser
     track: lastFMTrack[]
   }
 }
+
+type lastFMResponseError = {
+  message: string,
+  error: number
+}
+
 type lastFMUser = {
   page:number,
   perPage: number,
@@ -22,11 +30,21 @@ type lastFMUser = {
 }
 
 export type lastFMTrack = {
-  "@attr"?: { nowPlaying: boolean },
   album: {mbid: string, "#text": string},
   artist: {mbid: string, "#text": string},
   mbid: string,
   name: string,
   streamable: number,
   url: string
+} & (lastFMTrackHistoryInfo | lastFMTrackNPInfo)
+
+type lastFMTrackNPInfo = {
+  "@attr"?: { nowPlaying: boolean },
+}
+
+type lastFMTrackHistoryInfo = {
+  date: {
+    "#text": string
+    uts: string
+  }
 }
