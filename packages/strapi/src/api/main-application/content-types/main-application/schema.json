@@ -21,11 +21,6 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::profile.profile"
-    },
-    "coverLetter": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::cover-letter.cover-letter"
     }
   }
 }

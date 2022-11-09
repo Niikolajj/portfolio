@@ -71,7 +71,6 @@ export const getApplication = async (
   const {
     profile: mainProfile,
     experience: mainExperience,
-    coverLetter: mainCoverLetter,
   } = mainResponse;
 
   const {
@@ -85,7 +84,7 @@ export const getApplication = async (
     profile: override(mainProfile, profile),
     experience: override(mainExperience, experience),
     recipient,
-    coverLetter: override(mainCoverLetter, coverLetter),
+    coverLetter,
   };
 };
 
@@ -125,12 +124,15 @@ export const checkCode = async (
 
 export type applicationType = {
   code?: string;
-  profile: profileType;
-  experience: experienceType;
   recipient: recipientType;
   picture?: any;
   coverLetter: coverLetterType;
-} & { [key: string]: any };
+} & defaultApplicationType & { [key: string]: any };
+
+export type defaultApplicationType = {
+  profile: profileType;
+  experience: experienceType;
+}
 
 export type profileType = {
   personal: {
