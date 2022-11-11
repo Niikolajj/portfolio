@@ -23,15 +23,28 @@ export default function index({
 
   return (
     <Box paddingX={4}>
-      <VStack alignItems={"flex-start"} marginBottom={12}>
-        <Text marginBottom={6}>{coverLetter.title}</Text>
-        <Text>{titleArray.join(" ")}</Text>
-        <ReactMarkdown>{coverLetter.opening}</ReactMarkdown>
-        <ReactMarkdown>{coverLetter.body}</ReactMarkdown>
-        <ReactMarkdown>{coverLetter.closing}</ReactMarkdown>
+      <VStack alignItems={"flex-start"} marginBottom={8}>
+        <Text paddingBottom={4}>Bewerbung als {coverLetter.title}</Text>
+        <Text paddingBottom={4} textAlign={"justify"}>
+          {titleArray.join(" ")}
+        </Text>
+        <ReactMarkdown components={{ p: TextField }}>
+          {coverLetter.opening}
+        </ReactMarkdown>
+        <ReactMarkdown components={{ p: TextField }}>
+          {coverLetter.body}
+        </ReactMarkdown>
+        <ReactMarkdown components={{ p: TextField }}>
+          {coverLetter.closing}
+        </ReactMarkdown>
       </VStack>
       <Text>{coverLetter.formalClosing}</Text>
       <Text>{personal.firstName + " " + personal.lastName}</Text>
     </Box>
   );
 }
+
+const TextField = (props: any) => {
+  const { children } = props;
+  return <Text textAlign={"justify"}>{children}</Text>;
+};
