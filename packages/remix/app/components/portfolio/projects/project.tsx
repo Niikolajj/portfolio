@@ -4,7 +4,7 @@ import {
   AspectRatio,
   Flex,
   useColorModeValue,
-  Link as ChakraLink
+  Link as ChakraLink,
 } from "@chakra-ui/react";
 import { Link } from "@remix-run/react";
 import type { projectType } from "~/api/strapi";
@@ -28,7 +28,7 @@ export const Project = ({ project }: { project: projectType }) => {
           variant={"hover"}
           flexBasis={"100%"}
         >
-          <Flex >
+          <Flex>
             <AspectRatio ratio={1} height={"100%"}>
               <Flex height={"100%"} width={"100%"}></Flex>
             </AspectRatio>

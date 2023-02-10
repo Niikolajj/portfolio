@@ -50,7 +50,7 @@ export const getProjects = async (
 };
 
 export const getTags = async () => {
-  return fetchStrapi<tagType[]>("tags", {"populate[0]":"projects"});
+  return fetchStrapi<tagType[]>("tags", { "populate[0]": "projects" });
 };
 
 export const getApplication = async (
@@ -68,17 +68,9 @@ export const getApplication = async (
     }
   );
 
-  const {
-    profile: mainProfile,
-    experience: mainExperience,
-  } = mainResponse;
+  const { profile: mainProfile, experience: mainExperience } = mainResponse;
 
-  const {
-    profile,
-    experience,
-    recipient,
-    coverLetter,
-  } = response[0];
+  const { profile, experience, recipient, coverLetter } = response[0];
 
   return {
     profile: override(mainProfile, profile),
@@ -132,7 +124,7 @@ export type applicationType = {
 export type defaultApplicationType = {
   profile: profileType;
   experience: experienceType;
-}
+};
 
 export type profileType = {
   personal: {
@@ -244,7 +236,7 @@ export type portfolioType = {
   header?: headerType;
   aboutMe?: textElementType;
   skillList: tagListType;
-  toLearnList: textElementType
+  toLearnList: textElementType;
   nowListening: nowPlayingType;
 };
 
@@ -254,9 +246,9 @@ export type headerType = {
 };
 
 export type nowPlayingType = {
-  lastFMUsername: string,
-  fallbackUrl: string
-}
+  lastFMUsername: string;
+  fallbackUrl: string;
+};
 
 export type textElementType = {
   title: string;

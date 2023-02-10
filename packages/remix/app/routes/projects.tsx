@@ -13,7 +13,9 @@ import { getTags } from "~/api/strapi";
 import { AiFillHome } from "react-icons/ai";
 import TagLink from "~/components/portfolio/projects/tagLink";
 
-export const loader: LoaderFunction = async (): Promise<{ tags: tagType[] }> => {
+export const loader: LoaderFunction = async (): Promise<{
+  tags: tagType[];
+}> => {
   const tags = await getTags();
   return { tags };
 };
@@ -37,7 +39,7 @@ export default function Index() {
               {tags.map((tag: tagType) => {
                 return (
                   tag.projects.length > 0 && (
-                    <TagLink tag={tag} paramSlug={params.tagSlug}/>
+                    <TagLink tag={tag} paramSlug={params.tagSlug} />
                   )
                 );
               })}

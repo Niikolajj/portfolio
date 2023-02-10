@@ -7,10 +7,7 @@ export default function ListElement({ listElement }: { listElement: tagType }) {
   return (
     <Flex key={listElement.id} alignItems={"center"} gap={1}>
       {listElement.link ? (
-        <Link
-          as={RemixLink}
-          to={`/projects/${listElement.slug}`}
-        >
+        <Link as={RemixLink} to={`/projects/${listElement.slug}`}>
           {listElement.title}
         </Link>
       ) : (

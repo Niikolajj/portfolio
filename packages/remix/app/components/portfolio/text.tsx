@@ -12,11 +12,8 @@ export default function Text({
     <Box alignSelf={"flex-start"}>
       {title && <Heading>{title}</Heading>}
       <Flex direction={"column"} gap={2}>
-        <ReactMarkdown components={{ p: ChakraText }}>
-          {richText}
-        </ReactMarkdown>
+        <ReactMarkdown components={{ p: ChakraText }}>{richText}</ReactMarkdown>
       </Flex>
     </Box>
   );
 }
-

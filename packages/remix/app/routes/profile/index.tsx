@@ -30,7 +30,7 @@ export const loader: LoaderFunction = async ({
       application.picture = buffer.toString("base64");
     }
     return {
-      application
+      application,
     };
   }
   return redirect("/");
@@ -43,7 +43,7 @@ export type themeType = {
 };
 
 type profileType = {
-  application: applicationType
+  application: applicationType;
 };
 
 export default function Index() {
