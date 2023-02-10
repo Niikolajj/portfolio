@@ -41,7 +41,7 @@ export const ProjectList = ({ projects }: { projects: projectType[] }) => {
                     <Flex
                       height={"4em"}
                       width={"4em"}
-                      flexShrink={1}
+                      flexShrink={0}
                       justifyContent={"center"}
                     >
                       <Image
