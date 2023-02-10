@@ -25,7 +25,7 @@ export default function TagLink({
       key={tag.id}
       justifyContent={"space-between"}
       gap={"2"}
-      borderLeftWidth={"0.5em"}
+      borderLeftWidth={{ md: "0.25em" }}
       borderColor={paramSlug == tag.slug ? selected : "transparent"}
     >
       <Text paddingLeft={0.5} as={"span"} textShadow={"#FFF7 0 0 1em"}>

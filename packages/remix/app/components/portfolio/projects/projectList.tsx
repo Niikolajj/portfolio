@@ -36,11 +36,11 @@ export const ProjectList = ({ projects }: { projects: projectType[] }) => {
                 variant={"hover"}
                 flexGrow={1}
               >
-                <Flex padding={3} gap={2} flexGrow={1}>
+                <Flex paddingX={{ md: 2 }} paddingY={2} gap={2} flexGrow={1}>
                   {project.thumbnail && (
                     <Flex
-                      height={"4em"}
-                      width={"4em"}
+                      height={{ md: "4em" }}
+                      width={{ md: "4em" }}
                       flexShrink={0}
                       justifyContent={"center"}
                     >

@@ -25,7 +25,10 @@ export default function Index() {
   const params = useParams();
   return (
     <Flex direction={"column"}>
-      <Container maxWidth={"container.xl"} height={"6em"}></Container>
+      <Container
+        maxWidth={"container.xl"}
+        height={{ base: "1em", md: "6em" }}
+      ></Container>
       <Container maxWidth={"container.xl"}>
         <HStack width={"100%"} alignItems={"flex-start"}>
           <VStack flex={"0 0 20%"} alignItems={"stretch"}>
@@ -50,6 +53,7 @@ export default function Index() {
           </VStack>
         </HStack>
       </Container>
+      <Container maxWidth={"container.xl"} height={"2em"}></Container>
     </Flex>
   );
 }
