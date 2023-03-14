@@ -19,11 +19,12 @@ export default function index({ title, elements, theme }: timelineData) {
   return (
     <VStack width={"100%"} alignItems={"flex-start"} spacing={2}>
       <Heading
-        backgroundColor={theme.color ?? "white"}
+        backgroundColor={"white"}
+        borderColor={theme.color ?? "white"}
+        borderWidth={3}
         padding={1.5}
         paddingLeft={2}
         paddingRight={6}
-        color={theme.backgroundColor ?? "gray.700"}
         fontSize={"1.44em"}
         textAlign={"center"}
       >

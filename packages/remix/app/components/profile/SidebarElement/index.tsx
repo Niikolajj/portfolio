@@ -21,11 +21,11 @@ export default function index({
     <VStack direction={"column"} alignItems={"stretch"} spacing={1}>
       <Heading
         alignSelf={"flex-start"}
-        backgroundColor={theme.backgroundColor ?? "gray.700"}
+        borderColor={theme.backgroundColor ?? "gray.700"}
+        borderWidth={3}
         padding={1.5}
         paddingLeft={2}
         paddingRight={6}
-        color={theme.color ?? "white"}
         fontSize={"1.44em"}
       >
         {title}
