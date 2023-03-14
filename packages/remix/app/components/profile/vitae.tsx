@@ -92,7 +92,7 @@ export default function Vitae({ data, theme }: viteaProps) {
             theme={theme}
           />
           <TimelineElement
-            title={isGerman ? "Praktikas" : "Internships"}
+            title={isGerman ? "Praktika" : "Internships"}
             elements={internships}
             theme={theme}
           />
