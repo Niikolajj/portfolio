@@ -1,5 +1,7 @@
 import { Flex, HStack, Text, VStack } from "@chakra-ui/react";
 import { MdEmail, MdLabel, MdLocationPin, MdPhone } from "react-icons/md";
+import { AiFillGithub } from "react-icons/ai";
+import { IoMdGlobe } from "react-icons/io";
 import type { IconType } from "react-icons";
 import type { themeType } from "~/routes/profile";
 import type { languageValueType, strapiValueType } from "~/api/strapi";
@@ -25,6 +27,8 @@ const icons: { [key: string]: IconType } = {
   phone: MdPhone,
   email: MdEmail,
   location: MdLocationPin,
+  github: AiFillGithub,
+  website: IoMdGlobe,
   default: MdLabel,
 };
 
