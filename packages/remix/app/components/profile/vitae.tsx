@@ -23,7 +23,7 @@ export default function Vitae({ data, theme }: viteaProps) {
   return (
     <>
       <Box
-        backgroundColor={theme.backgroundColor ?? "gray.700"}
+        background={theme.backgroundColor ?? "gray.700"}
         color={"white"}
         padding={4}
       >

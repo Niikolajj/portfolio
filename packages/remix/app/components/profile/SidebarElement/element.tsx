@@ -63,13 +63,9 @@ export default function Element({ element, config = {}, theme }: elementProps) {
             <Flex
               flexGrow={1}
               height={"1rem"}
-              backgroundColor={
-                index < value
-                  ? theme?.backgroundColor ?? "gray.700"
-                  : "gray.300"
-              }
+              backgroundColor={index < value ? "transparent" : "gray.300"}
               key={index}
-              marginBottom={1}
+              paddingBottom={1}
             />
           );
         });
@@ -79,13 +75,22 @@ export default function Element({ element, config = {}, theme }: elementProps) {
   return (
     <VStack
       alignItems={"flex-start"}
-      spacing={0}
+      spacing={typeof value === "number" ? 1 : 0}
       order={typeof value === "number" ? 6 - value : 0}
     >
       {showLabel && label && <Text>{label}</Text>}
       <HStack alignItems={"center"} width={"100%"}>
         {showIcon && <IconOutput />}
-        <Flex _before={before} direction={"row"} width={"100%"}>
+        <Flex
+          _before={before}
+          direction={"row"}
+          width={"100%"}
+          background={
+            typeof value === "number"
+              ? theme?.backgroundColor ?? "gray.700"
+              : "transparent"
+          }
+        >
           {valueOutput}
         </Flex>
       </HStack>

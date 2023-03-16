@@ -18,18 +18,18 @@ export default function index({ title, elements, theme }: timelineData) {
     );
   return (
     <VStack width={"100%"} alignItems={"flex-start"} spacing={2}>
-      <Heading
-        backgroundColor={"white"}
-        borderColor={theme.color ?? "white"}
-        borderWidth={3}
-        padding={1.5}
-        paddingLeft={2}
-        paddingRight={6}
-        fontSize={"1.44em"}
-        textAlign={"center"}
-      >
-        {title}
-      </Heading>
+      <VStack background={theme.color ?? "white"} padding={"0.2em"}>
+        <Heading
+          backgroundColor={"white"}
+          padding={1}
+          paddingLeft={2}
+          paddingRight={6}
+          fontSize={"1.44em"}
+          textAlign={"center"}
+        >
+          {title}
+        </Heading>
+      </VStack>
       <VStack direction={"column"} width={"100%"} alignSelf={"stretch"}>
         {display}
       </VStack>

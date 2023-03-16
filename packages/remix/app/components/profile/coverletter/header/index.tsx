@@ -20,11 +20,7 @@ export default function index({
 
   return (
     <>
-      <Box
-        backgroundColor={theme.backgroundColor}
-        color={theme.color}
-        padding={4}
-      >
+      <Box background={theme.backgroundColor} color={theme.color} padding={4}>
         <HStack
           alignItems={"stretch"}
           spacing={4}

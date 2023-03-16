@@ -19,17 +19,22 @@ export default function index({
 }: sidebarProps) {
   return (
     <VStack direction={"column"} alignItems={"stretch"} spacing={1}>
-      <Heading
+      <VStack
+        background={theme.backgroundColor ?? "gray.700"}
+        padding={"0.2em"}
         alignSelf={"flex-start"}
-        borderColor={theme.backgroundColor ?? "gray.700"}
-        borderWidth={3}
-        padding={1.5}
-        paddingLeft={2}
-        paddingRight={6}
-        fontSize={"1.44em"}
       >
-        {title}
-      </Heading>
+        <Heading
+          alignSelf={"stretch"}
+          backgroundColor={"white"}
+          padding={1}
+          paddingLeft={2}
+          paddingRight={6}
+          fontSize={"1.44em"}
+        >
+          {title}
+        </Heading>
+      </VStack>
       <VStack alignItems={"stretch"} spacing={0}>
         {elements.map((element, index: number) => {
           return (
