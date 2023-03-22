@@ -2430,6 +2430,11 @@
   dependencies:
     tslib "^2.0.1"
 
+"@fontsource/manrope@^4.5.13":
+  version "4.5.13"
+  resolved "https://registry.yarnpkg.com/@fontsource/manrope/-/manrope-4.5.13.tgz#c78c3141c506baace10a6ae304f2d56bc2f5217a"
+  integrity sha512-UFN5DMGBp8nFpwhPQXfpSbsEm4OVISqUKQy+rA+pb1zYGoH+OGN1woKEND8VLx+pC7rY3nrPRCJvSuuOaNdW7Q==
+
 "@formatjs/ecma402-abstract@1.9.3":
   version "1.9.3"
   resolved "https://registry.yarnpkg.com/@formatjs/ecma402-abstract/-/ecma402-abstract-1.9.3.tgz#00892014c805935b5b1345d238246e9bf3a2de50"
