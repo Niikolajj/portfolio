@@ -1,6 +1,8 @@
 // root.tsx
 import React, { useContext, useEffect } from "react";
-import Manrope from "@fontsource/manrope/index.css";
+import Manrope200 from "@fontsource/manrope/200.css";
+import Manrope700 from "@fontsource/manrope/700.css";
+import Manrope400 from "@fontsource/manrope/400.css";
 import { withEmotionCache } from "@emotion/react";
 import { ChakraProvider } from "@chakra-ui/react";
 import {
@@ -26,7 +28,15 @@ export let links: LinksFunction = () => {
   return [
     {
       rel: "stylesheet",
-      href: Manrope,
+      href: Manrope200,
+    },
+    {
+      rel: "stylesheet",
+      href: Manrope400,
+    },
+    {
+      rel: "stylesheet",
+      href: Manrope700,
     },
   ];
 };
