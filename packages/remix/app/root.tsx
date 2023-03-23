@@ -13,10 +13,15 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-import type { MetaFunction, LinksFunction } from "@remix-run/node"; // Depends on the runtime you choose
+import type {
+  MetaFunction,
+  LinksFunction,
+  ErrorBoundaryComponent,
+} from "@remix-run/node"; // Depends on the runtime you choose
 import BaseTheme from "./theme/BaseTheme";
 
 import { ServerStyleContext, ClientStyleContext } from "./context";
+import ErrorPage from "./components/page/ErrorPage";
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
@@ -96,3 +101,21 @@ export default function App() {
     </Document>
   );
 }
+
+export const ErrorBoundary: ErrorBoundaryComponent = ({ error }) => {
+  return (
+    <html>
+      <head>
+        <title>Oh no! :(</title>
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        <ChakraProvider theme={BaseTheme}>
+          <ErrorPage error={error} />
+        </ChakraProvider>
+        <Scripts />
+      </body>
+    </html>
+  );
+};
