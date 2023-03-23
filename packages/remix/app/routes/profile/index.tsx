@@ -49,9 +49,9 @@ type profileType = {
 export default function Index() {
   const { application } = useLoaderData();
   const theme: themeType = {
-    backgroundColor: application.recipient.company?.color ?? "#4EB393",
+    backgroundColor: application.recipient?.company?.color ?? "#4EB393",
     color: "#FFF",
-    layout: application.recipient.locale ?? locales.German,
+    layout: application.recipient?.locale ?? locales.German,
   };
 
   return (
