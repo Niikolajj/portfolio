@@ -5,23 +5,22 @@ export const fetchStrapi = async <T>(
   const paramString = Object.keys(parameters)
     .map((key) => `${key}=${parameters[key]}`)
     .join("&");
-    try {
-      const response = await fetch(
-        `${process.env.STRAPI_URL_BASE}/api/${endpoint}?${paramString}`,
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      return flattenObj(await response.json());
-    } catch (error) {
-      throw new Error("cms connection failed")
-    }
+  try {
+    const response = await fetch(
+      `${process.env.STRAPI_URL_BASE}/api/${endpoint}?${paramString}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return flattenObj(await response.json());
+  } catch (error) {
+    throw new Error("cms connection failed");
+  }
 };
-
 
 export const fetchFindStrapi = async <T>(
   endpoint: string,
