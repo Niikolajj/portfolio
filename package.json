@@ -5,15 +5,9 @@
   "workspaces": [
     "packages/*"
   ],
-  "devDependencies": {
-    "concurrently": "^7.2.2"
-  },
   "scripts": {
-    "build": "yarn workspaces run build",
-    "start": "concurrently --kill-others-on-fail -c 'bgGreen.black,bgBlue.black' \"yarn workspace strapi start\" \"yarn workspace remix start\"",
-    "server": "yarn workspace strapi develop",
-    "client": "yarn workspace remix dev",
-    "dev": "concurrently --kill-others-on-fail -c 'bgGreen.black,bgBlue.black' \"yarn:server\" \"yarn:client\""
-  },
-  "packageManager": "yarn@3.2.1"
+    "build": "pnpm -r -parallel run build",
+    "start": "pnpm -r -parallel run start",
+    "dev": "pnpm -r -parallel run dev"
+  }
 }
